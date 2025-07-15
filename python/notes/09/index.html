@@ -1,0 +1,614 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>python語言的筆記-scikit-learn數據集 | tomku的網誌
+</title><link rel=stylesheet href=/tomku/css/cssall.min.6db1d46d747ddea4cd158fef8a0e6f577651a77ebbe8bf96fc205497064d9dcf.css><script src=/tomku/js/main.js></script><script src=/tomku/js/header.js></script></head><body><header class=baseof_header_class><nav class=header_nav_class><div id=header_div_left class=header_div_class><a href=/tomku/><h1 class=header_h1_class>tomku的網誌</h1></a></div><div id=header_div_right class=header_div_class><ul class=header_menu_ul_class><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/>首頁</a></li><li class=header_menu_li_class><a class=header_menu_a_class2 onclick='displaymenu("header_menu_li_class_1")'>程式</a><ul id=header_menu_li_class_1 class=header_menu_ul_class2><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/c/>C</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/c++/>C++</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/golang/>golang</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/java/>java</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/python/>python</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/csharp/>csharp</a></li></ul></li><li class=header_menu_li_class><a class=header_menu_a_class2 onclick='displaymenu("header_menu_li_class_2")'>其他</a><ul id=header_menu_li_class_2 class=header_menu_ul_class2><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/esp/>esp</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/git/>git</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/hugo/>hugo</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/mysql/>mysql</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/minecraft/>minecraft</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/other/>other</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/qt/>qt</a></li></ul></li><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/tags/>標籤</a></li><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/about/>關於</a></li></ul></div></nav></header><main class=baseof_main_class><aside class="main left_aside_class"><div class=left_div_class3><button class=left_button_class onclick=displayleft()>☰</button></div><div id=left_div_class4 class=left_div_class4><div class=left_div_class><div class=left_div_class2>個人連結</div><div class=left_social_div_class><ul class=left_social_ul_class><li class=left_social_li_class><a href=https://github.com/tom8760925 class=left_social_a_class>github</a></li><li class=left_social_li_class><a href=https://www.notion.so/tomku-1dafd63b811e80debc8fe145cc6d494a class=left_social_a_class>副網誌</a></li></ul></div></div><div class=left_div_class><div class=left_div_class2>最新文章</div><nav><ul class=left_recent_ul_class><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/11/>python語言的筆記-scikit-learn非監督學習</a></header><footer class=left_recent_footer_class><time datetime=2025-07-15T23:10:10+08:00>2025-07-15</time></footer><a class=left_recent_a_class href=/tomku/python/notes/11/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/10/>python語言的筆記-scikit-learn監督式學習</a></header><footer class=left_recent_footer_class><time datetime=2025-07-13T22:47:16+08:00>2025-07-13</time></footer><a class=left_recent_a_class href=/tomku/python/notes/10/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/c++/practice/problems39/>C++語言的練習-練習實作Validate Binary Search Tree</a></header><footer class=left_recent_footer_class><time datetime=2025-07-11T10:41:14+08:00>2025-07-11</time></footer><a class=left_recent_a_class href=/tomku/c++/practice/problems39/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/c++/practice/problems38/>C++語言的練習-練習實作Binary Tree Maximum Path Sum</a></header><footer class=left_recent_footer_class><time datetime=2025-07-10T11:43:07+08:00>2025-07-10</time></footer><a class=left_recent_a_class href=/tomku/c++/practice/problems38/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/09/>python語言的筆記-scikit-learn數據集</a></header><footer class=left_recent_footer_class><time datetime=2025-07-09T19:45:38+08:00>2025-07-09</time></footer><a class=left_recent_a_class href=/tomku/python/notes/09/></a></article></li></ul></nav></div><div class=left_div_class><div class=left_div_class2>標籤</div><div class=left_tags_div_class><a href=/tomku/categories/c++%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>C++語言<sup>157</sup>
+</a><a href=/tomku/categories/cmake/ class=left_tags_a_class>Cmake<sup>2</sup>
+</a><a href=/tomku/categories/csharp%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Csharp語言<sup>1</sup>
+</a><a href=/tomku/categories/c%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>C語言<sup>22</sup>
+</a><a href=/tomku/categories/esp/ class=left_tags_a_class>Esp<sup>9</sup>
+</a><a href=/tomku/categories/git/ class=left_tags_a_class>Git<sup>1</sup>
+</a><a href=/tomku/categories/golang%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Golang語言<sup>20</sup>
+</a><a href=/tomku/categories/hugo/ class=left_tags_a_class>Hugo<sup>2</sup>
+</a><a href=/tomku/categories/linux/ class=left_tags_a_class>Linux<sup>30</sup>
+</a><a href=/tomku/categories/minecraft/ class=left_tags_a_class>Minecraft<sup>6</sup>
+</a><a href=/tomku/categories/mysql/ class=left_tags_a_class>Mysql<sup>3</sup>
+</a><a href=/tomku/categories/proxomx/ class=left_tags_a_class>Proxomx<sup>3</sup>
+</a><a href=/tomku/categories/python%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Python語言<sup>12</sup>
+</a><a href=/tomku/categories/qt/ class=left_tags_a_class>Qt<sup>11</sup>
+</a><a href=/tomku/categories/xcode/ class=left_tags_a_class>Xcode<sup>3</sup>
+</a><a href=/tomku/categories/%E5%85%B6%E4%BB%96/ class=left_tags_a_class>其他<sup>1</sup>
+</a><a href=/tomku/categories/%E9%97%9C%E6%96%BC/ class=left_tags_a_class>關於<sup>1</sup></a></div></div></div></aside><div class="main main_div_class"><section class=main_page_section_class><article><header><div class=main_page_breadcrumb_div_class><a href=/tomku/>簡介
+</a>/<a href=/tomku/python/>Pythons
+</a>/</div><h1 class=main_page_h1_class>python語言的筆記-scikit-learn數據集</h1></header><time class=main_page_time_class datetime=2025-07-09T19:45:38+08:00>2025-07-09</time><div class=main_page_div_class2><h1 id=scikit-learn數據集>scikit-learn數據集</h1><p>這篇是python的筆記第09篇</p><h2 id=雙向聚類-biclustering>雙向聚類 (Biclustering)</h2><p>應用在樣本和特徵分組</p><h3 id=資料集>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_biclusters
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>data, rows, columns <span style=color:#f92672>=</span> make_biclusters(
+</span></span><span style=display:flex><span>    shape<span style=color:#f92672>=</span>(<span style=color:#ae81ff>30</span>, <span style=color:#ae81ff>30</span>), <span style=color:#75715e>#設定x,y大小</span>
+</span></span><span style=display:flex><span>    n_clusters<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>,   <span style=color:#75715e>#設定數量</span>
+</span></span><span style=display:flex><span>    shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>,  <span style=color:#75715e>#設定是否打亂</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出>輸出</h3><pre tabindex=0><code>print(data)
+</code></pre><p>資料</p><pre tabindex=0><code>[[47.53198042 47.53198042 47.53198042 47.53198042 47.53198042 47.53198042
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [47.53198042 47.53198042 47.53198042 47.53198042 47.53198042 47.53198042
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [47.53198042 47.53198042 47.53198042 47.53198042 47.53198042 47.53198042
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.
+  74.82920441 74.82920441 74.82920441 74.82920441 74.82920441  0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.
+  74.82920441 74.82920441 74.82920441 74.82920441 74.82920441  0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+...
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.         23.20803017
+  23.20803017 23.20803017 23.20803017 23.20803017 23.20803017 23.20803017]]
+</code></pre><pre tabindex=0><code>print(rows)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ True  True  True False False False False False False False False False
+  False False False False False False False False False False False False
+  False False False False False False]
+ [False False False  True  True  True  True  True False False False False
+  False False False False False False False False False False False False
+  False False False False False False]
+ [False False False False False False False False  True  True  True  True
+   True  True False False False False False False False False False False
+  False False False False False False]
+ [False False False False False False False False False False False False
+  False False  True  True  True  True  True  True  True False False False
+  False False False False False False]
+ [False False False False False False False False False False False False
+  False False False False False False False False False  True  True  True
+   True  True  True  True  True  True]]
+</code></pre><pre tabindex=0><code>print(columns)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ True  True  True  True  True  True False False False False False False
+  False False False False False False False False False False False False
+  False False False False False False]
+ [False False False False False False  True  True  True  True  True False
+  False False False False False False False False False False False False
+  False False False False False False]
+ [False False False False False False False False False False False  True
+   True  True  True  True  True  True False False False False False False
+  False False False False False False]
+ [False False False False False False False False False False False False
+  False False False False False False  True  True  True  True  True False
+  False False False False False False]
+ [False False False False False False False False False False False False
+  False False False False False False False False False False False  True
+   True  True  True  True  True  True]]
+</code></pre><h3 id=圖表>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定顏色</span>
+</span></span><span style=display:flex><span>cm_bright <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>cm<span style=color:#f92672>.</span>Blues
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>matshow(data, cmap<span style=color:#f92672>=</span>cm_bright)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image.png alt="alt text"></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(data,data)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-1.png alt="alt text"></p><h2 id=聚類分析>聚類分析</h2><p>應用在樣本分組</p><h3 id=資料集-1>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_blobs
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_blobs(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>,
+</span></span><span style=display:flex><span>    centers<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>,
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-1>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ -7.23731039  -9.03108652]
+ [ -8.16550136  -7.00850439]
+ [ -7.02266844  -7.57041289]
+ [ -8.86394306  -5.05323981]
+ [  0.08525186   3.64528297]
+ [ -0.79415228   2.10495117]
+ [ -1.34052081   4.15711949]
+ [-10.32012971  -4.3374029 ]
+ [ -2.18773166   3.33352125]
+ [ -8.53560457  -6.01348926]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[2 2 2 1 0 0 0 1 0 1]
+</code></pre><h3 id=圖表-1>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-2.png alt="alt text"></p><h2 id=同心圓形數據集>同心圓形數據集</h2><p>用在無法用一條線分類的非線性數據</p><h3 id=資料集-2>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_circles
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_circles(
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-2>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[-6.47213595e-01 -4.70228202e-01]
+ [-3.40623433e-01 -7.23861642e-01]
+ [-5.35826795e-01 -8.44327926e-01]
+ [-5.83174902e-01 -5.47637685e-01]
+ [ 5.09939192e-01 -6.16410594e-01]
+ [-5.35826795e-01  8.44327926e-01]
+ [-1.87381315e-01 -9.82287251e-01]
+ [-5.09939192e-01 -6.16410594e-01]
+ [-5.83174902e-01  5.47637685e-01]
+ [-2.47213595e-01  7.60845213e-01]
+ [ 4.28661436e-01 -6.75462340e-01]
+ [ 1.87381315e-01 -9.82287251e-01]
+ [ 5.83174902e-01  5.47637685e-01]
+ [ 7.74866529e-01  1.98951910e-01]
+ [ 7.93691761e-01  1.00266587e-01]
+ [-6.37423990e-01 -7.70513243e-01]
+ [-7.28968627e-01 -6.84547106e-01]
+ [ 7.28968627e-01 -6.84547106e-01]
+ [-7.43821189e-01 -2.94499642e-01]
+ [ 3.09016994e-01  9.51056516e-01]
+ [ 9.68583161e-01  2.48689887e-01]
+ [-7.74866529e-01  1.98951910e-01]
+ [ 7.43821189e-01 -2.94499642e-01]
+ [ 5.02324156e-02  7.98421383e-01]
+ [-7.28968627e-01  6.84547106e-01]
+...
+ [ 4.25779292e-01  9.04827052e-01]
+ [-7.43821189e-01  2.94499642e-01]
+ [ 6.27905195e-02  9.98026728e-01]
+ [-6.27905195e-02 -9.98026728e-01]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[1 1 0 1 1 0 0 1 1 1 1 0 1 1 1 0 0 0 1 0 0 1 1 1 0 0 1 0 0 0 1 1 1 1 1 0 0
+ 1 0 0 1 1 1 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 0 1 1 0 0 1 0 1 0 1 1 0 1 1
+ 0 1 0 1 1 0 0 0 0 0 0 1 0 0 1 1 0 0 1 1 0 1 0 1 0 0]
+</code></pre><h3 id=圖表-2>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-3.png alt="alt text"></p><h2 id=分類任務>分類任務</h2><p>模擬各種真實世界的分類問題</p><h3 id=資料集-3>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-3>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ 0.6065484   0.81695766  1.05132077 ... -0.36453805  0.16466507
+  -0.76780375]
+ [-3.05376438  0.92116205 -1.45832446 ...  0.20437739 -1.55269878
+  -0.4466992 ]
+ [ 0.60640394  0.68064537  1.02124813 ...  1.03703898 -0.83001099
+  -0.03599018]
+ ...
+ [-2.30803851 -1.42368943  1.14256392 ... -0.24701649 -0.37911961
+   0.27610275]
+ [-1.53702887  2.14957042  0.32455352 ...  2.15323347  1.31972591
+  -0.8797298 ]
+ [ 0.37167029 -0.95543218 -0.1484898  ... -0.6294416   0.14225137
+   0.78002714]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[1 1 1 0 0 0 0 1 0 1 0 0 0 1 0 1 1 0 1 0 1 1 0 1 0 0 0 1 0 1 0 1 1 0 0 1 1
+ 1 1 1 1 1 0 1 0 0 0 1 1 1 1 0 0 1 0 1 1 1 0 0 1 0 1 1 1 0 0 0 0 1 0 0 1 1
+ 0 1 0 1 0 0 0 0 1 0 1 0 0 0 1 0 0 1 0 0 1 1 1 0 1 0]
+</code></pre><h3 id=圖表-3>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-4.png alt="alt text"></p><h2 id=多類別分類數據集>多類別分類數據集</h2><p>模擬分位數</p><h3 id=資料集-4>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_gaussian_quantiles
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_gaussian_quantiles(
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-4>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[-0.18656977 -0.10174587]
+ [ 1.27375593  1.96710175]
+ [-1.27255876  0.31354772]
+ [ 0.83898341  0.93110208]
+ [ 1.65980218  0.74204416]
+ [-0.44712856  1.2245077 ]
+ [ 0.90085595 -0.68372786]
+ [-0.62000084  0.69803203]
+ [ 0.3190391  -0.24937038]
+ [ 1.62765075  0.3380117 ]
+ [ 0.86540763 -2.3015387 ]
+ [-0.26788808  0.53035547]
+ [-1.10061918  1.14472371]
+ [ 1.74481176 -0.7612069 ]
+ [-0.67066229  0.37756379]
+ [-1.37311732  0.31515939]
+ [-0.3224172  -0.38405435]
+ [-1.85798186  1.23616403]
+ [ 0.81095167  1.04444209]
+ [ 1.90465871  1.1110567 ]
+ [ 1.62434536 -0.61175641]
+ [ 0.60231928  0.4202822 ]
+ [ 0.19829972  0.11900865]
+ [ 1.33145711 -0.28730786]
+ [ 0.50318481  1.29322588]
+...
+ [-0.67124613 -0.0126646 ]
+ [ 0.04366899 -0.22631424]
+ [ 0.19091548  2.10025514]
+ [ 0.79280687 -0.62353073]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[0 2 2 1 2 2 1 1 0 2 2 0 2 2 1 2 0 2 2 2 2 0 0 2 2 1 0 0 2 0 0 1 0 1 1 1 1
+ 1 2 1 1 0 1 1 1 0 1 0 0 1 2 2 2 0 2 1 1 0 0 1 2 2 1 1 2 0 2 0 2 1 1 2 0 0
+ 1 2 2 0 1 0 1 1 2 0 0 0 0 1 0 2 0 0 1 1 2 2 0 0 2 1]
+</code></pre><h3 id=圖表-4>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-5.png alt="alt text"></p><h2 id=低秩-low-rank>低秩 (low-rank)</h2><p>應用在降維推薦系統和因子分析</p><h3 id=資料集-5>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_low_rank_matrix
+</span></span><span style=display:flex><span>X <span style=color:#f92672>=</span> make_low_rank_matrix(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>,
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>,
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-5>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ 2.01413821e-01 -9.75864504e-02  4.74898457e-02  1.14809019e-02
+  -1.12504332e-01  2.04640432e-02 -6.33659720e-02 -3.04111204e-01
+  -1.46782700e-04  7.79657650e-03  2.36472188e-01  3.89275529e-02
+   1.63922319e-01 -1.98469850e-01 -8.18610713e-03  1.04236720e-01
+  -9.16131432e-02  1.99651268e-02 -5.25101964e-02 -4.25428832e-02
+  -4.84576149e-02  2.25197474e-01 -6.32446143e-02  5.90569783e-02
+   2.63385001e-01  7.14334181e-02 -1.29347579e-02 -9.44194867e-02
+   1.08511985e-01 -1.50515989e-01]
+ [ 4.82327674e-02 -1.22362396e-01  3.56645532e-02 -8.99312765e-02
+   6.43468093e-02 -2.86174261e-02  2.68411092e-02 -3.36202040e-02
+   1.14616364e-01  3.42596469e-02  1.86543178e-02 -1.79180726e-01
+  -2.83528473e-01  1.70488440e-01 -1.90625627e-02 -7.29535209e-02
+  -8.48287801e-03  4.41079018e-02 -1.84808456e-01 -7.58300069e-02
+   3.78754872e-02 -2.31747984e-01  6.30689543e-02 -1.14645459e-01
+  -2.11002962e-02 -4.78432308e-02 -6.13647559e-02 -1.73663437e-01
+   2.90041364e-02  9.74935139e-02]
+ [ 3.03466997e-02  1.21260806e-01 -1.03783334e-01 -2.43045100e-02
+   6.55474961e-02 -1.97317823e-01 -9.89878144e-02 -8.01547574e-02
+   1.54482299e-02 -1.14368267e-01 -1.92910967e-01  8.38238770e-02
+  -1.93524717e-02 -7.40002452e-02 -7.71455091e-02 -3.56976243e-02
+   4.05415424e-02  2.03194479e-02  1.70861299e-01  1.16431974e-01
+   8.51291784e-02 -6.53615109e-02 -6.96987543e-02 -1.80056482e-01
+  -1.76334552e-01 -1.91887244e-01 -5.81938526e-02 -8.66076369e-02
+   1.72071876e-01 -4.95462951e-02]
+ [ 7.73511727e-02 -1.71719077e-01 -1.77319810e-01  5.31071819e-02
+...
+  -1.53388833e-01 -6.54219430e-02  3.77049720e-02  5.95660745e-02
+   1.43909710e-01  1.52685328e-01  1.19069207e-02  6.49156485e-02
+  -9.95057568e-02 -2.70940648e-01 -1.47504772e-01 -4.11084365e-02
+  -1.29819983e-03 -1.41440237e-01]]
+</code></pre><h3 id=圖表-5>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定顏色</span>
+</span></span><span style=display:flex><span>cm_bright <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>cm<span style=color:#f92672>.</span>Blues
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>matshow(X, cmap<span style=color:#f92672>=</span>cm_bright)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-6.png alt="alt text"></p><h2 id=半月形數據集>半月形數據集</h2><p>模擬非線性可分</p><h3 id=資料集-6>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_moons
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_moons(
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-6>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ 1.34536505e+00 -4.38468422e-01]
+ [ 1.57211666e+00 -3.20172255e-01]
+ [-5.18392568e-01  8.55142763e-01]
+ [ 1.40478334e+00 -4.14412623e-01]
+ [ 1.92691676e+00  1.24732995e-01]
+ [ 4.62538290e-01  8.86599306e-01]
+ [-6.72300890e-01  7.40277997e-01]
+ [ 1.46253829e+00 -3.86599306e-01]
+ [ 6.54634946e-01 -4.38468422e-01]
+ [ 4.27883340e-01 -3.20172255e-01]
+ [ 1.90096887e+00  6.61162609e-02]
+ [-8.01413622e-01  5.98110530e-01]
+ [ 7.30832427e-02  1.24732995e-01]
+ [ 8.20998618e-03  3.72122838e-01]
+ [ 2.05460725e-03  4.35929780e-01]
+ [-4.62538290e-01  8.86599306e-01]
+ [-4.04783343e-01  9.14412623e-01]
+ [-9.49055747e-01  3.15108218e-01]
+ [ 1.22252093e+00 -4.74927912e-01]
+ [ 8.01413622e-01  5.98110530e-01]
+ [ 9.91790014e-01  1.27877162e-01]
+ [ 9.03976974e-01 -4.95379113e-01]
+ [ 1.99179001e+00  3.72122838e-01]
+ [ 2.81650650e-01 -1.95682551e-01]
+ [ 3.45365054e-01  9.38468422e-01]
+...
+ [ 8.38088105e-01  5.45534901e-01]
+ [ 8.40400105e-01 -4.87181783e-01]
+ [ 7.18349350e-01  6.95682551e-01]
+ [-7.18349350e-01  6.95682551e-01]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[1 1 0 1 1 0 0 1 1 1 1 0 1 1 1 0 0 0 1 0 0 1 1 1 0 0 1 0 0 0 1 1 1 1 1 0 0
+ 1 0 0 1 1 1 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 0 1 1 0 0 1 0 1 0 1 1 0 1 1
+ 0 1 0 1 1 0 0 0 0 0 0 1 0 0 1 1 0 0 1 1 0 1 0 1 0 0]
+</code></pre><h3 id=圖表-6>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-7.png alt="alt text"></p><h2 id=多標籤分類-multi-label-classification>多標籤分類 (Multi-label Classification)</h2><p>用來分類同一種物品有多的標籤</p><h3 id=資料集-7>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_multilabel_classification
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_multilabel_classification(
+</span></span><span style=display:flex><span>    n_classes <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> ,
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-7>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ 3.  1.  2. ...  3.  1.  3.]
+ [ 4.  0.  2. ...  0.  3. 11.]
+ [ 5.  1.  3. ...  2.  2.  7.]
+ ...
+ [ 5.  0.  4. ...  3.  2.  2.]
+ [ 7.  0.  3. ...  0.  2.  5.]
+ [ 1.  4.  4. ...  1.  0.  2.]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[[0]
+ [1]
+ [0]
+ [1]
+ [1]
+ [0]
+ [0]
+ [1]
+ [1]
+ [1]
+ [0]
+ [1]
+ [1]
+ [0]
+ [1]
+ [1]
+ [1]
+ [0]
+ [1]
+ [1]
+ [1]
+ [0]
+ [1]
+ [1]
+ [0]
+...
+ [1]
+ [0]
+ [1]
+ [0]]
+</code></pre><h3 id=圖表-7>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-8.png alt="alt text"></p><h2 id=合成回歸-regression>合成回歸 (Regression)</h2><p>模擬各種複雜度的回歸問題</p><h3 id=資料集-8>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-8>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[-0.11181622 -1.03800006  0.90239871 ... -0.02216116 -2.05998482
+   0.66713213]
+ [-2.25009061 -0.97692679  0.34326121 ...  1.61700879 -1.84834288
+   0.40946448]
+ [ 0.95474309 -0.44776333  1.15654825 ...  1.25662578  0.12182436
+   0.51056082]
+ ...
+ [-0.55134167 -0.8657285  -0.07594006 ... -0.52973059 -0.45028312
+   0.62834172]
+ [ 0.68255141 -1.14434139 -1.89636092 ...  0.01740941 -0.22631424
+   0.81095167]
+ [-0.98735088 -0.59835746 -1.41083193 ...  0.7798494   0.21290879
+   0.2398715 ]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[ 120.37680461 -264.13900241  109.94841137   59.04721153  157.82907844
+  120.92870639  127.78203478  -67.0055798  -196.15591057  559.79608351
+  180.84301684 -239.19474316  109.36165262 -271.25269086 -223.0409853
+   79.39870686   30.68819272 -224.51559539  500.34229369  393.92926829
+ -211.13263548  107.24277533  -99.81769327  109.48230336   35.15718021
+  446.54106897   23.35732803  -46.62697852   50.06098963   62.46490284
+   13.63195523   26.00705555  214.7339066  -193.20025761 -113.58233264
+  -76.70970712  156.34010085   67.00949397  127.13277776   -6.52630318
+ -221.30532293  389.69823053  -97.61293455  147.00000006 -175.59580578
+  -63.15600263   85.24266924  -31.75653534  -82.65090255 -178.06074843
+  -50.60534915   28.35310497  198.39724974   60.66855253  -27.77640913
+   60.34468422  361.94894727   10.27827991   30.60870612 -129.68255502
+ -214.44040345   91.11466214  330.24267941 -400.03074213   91.85180291
+  167.68891862   74.74536365 -248.61277828  350.87571434 -193.78950187
+  -99.73676506   17.26589042 -101.84646871  -52.80530791  357.0451615
+ -163.00858317 -156.79780068   90.28339902  200.25666812  330.66920658
+ -294.68278216 -162.32039297 -226.46175032  -97.18246268 -103.60195665
+ -228.29522183 -102.73887433  -67.54905161   55.96709931 -107.00892588
+   79.41097474  329.67079749  -23.85001107  242.66692263   26.93178242
+ -104.38526927 -114.18753796   12.46049285   53.72772534 -172.1797854 ]
+</code></pre><h3 id=圖表-8>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-9.png alt="alt text"></p><h2 id=流形學習-manifold-learning>流形學習 (Manifold Learning)</h2><p>模擬三維空間數據集</p><h3 id=資料集-9>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_s_curve
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_s_curve(
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-9>輸出</h3><pre tabindex=0><code>print(x)
+</code></pre><p>資料</p><pre tabindex=0><code>[[-0.70473473  0.6532898   0.2905291 ]
+ [ 0.87482925  1.0541162  -1.48443141]
+ [ 0.99999942  1.7718842   1.00107796]
+ [-0.95761958  0.71453952  1.288036  ]
+ [ 0.18655523  1.8170703   1.98244448]
+ [ 0.64461958  1.24672023  1.7645035 ]
+ [-0.18361705  0.03164249  1.98299785]
+ [-0.99336716  1.85887447  0.88501443]
+ [-0.82654617  1.38179384  0.43713108]
+ [ 0.35773299  1.9946457  -0.06617608]
+ [-0.69006131  0.34468102  0.27624908]
+ [ 0.98475154  0.2742715  -1.17396667]
+ [-0.348641    1.86519093  1.93725634]
+ [-0.409659    1.39363632 -1.91223873]
+ [ 0.96687107  0.13200035  1.2552652 ]
+ [ 0.99935846  1.51092611 -1.03581445]
+ [-0.70284127  1.50775238  0.28865329]
+ [ 0.52536038  1.84604907 -0.14912018]
+ [ 0.245156    1.42304952  1.96948364]
+ [-0.29195114  0.24854192  1.95643323]
+ [ 0.3023355   0.03976027 -1.95320158]
+ [-0.95559394  0.05242197 -1.29468666]
+ [-0.98244733  0.05661298  1.18654022]
+ [ 0.97090815  0.49242214 -1.23945222]
+ [-0.39474614  1.7200559  -1.91879023]
+...
+ [-0.61325095  0.02790315 -1.78988814]
+ [ 0.63993433  0.46872417 -0.2315704 ]
+ [ 0.99963411  1.23355671  1.0270489 ]
+ [ 0.89304377  1.89803264 -0.5500302 ]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[-0.78204918  2.07650943 -4.71131102 -1.86297161 -3.32924729 -3.84211823
+ -2.95692785 -1.45555586 -0.97294363  0.3658391  -0.76157376  1.74565267
+ -2.78547192  3.56367288 -4.454267    1.60661843 -0.77938388  0.5531386
+ -3.38927326 -2.84532643  2.83445078  4.41326138 -1.75843569  1.81259795
+  3.54738419  3.71908019 -3.91086617 -4.34430632 -3.11177499  3.56390913
+ -3.78549191 -0.74354312  4.31550715  0.31257545  1.80839919 -1.73872422
+  1.75772983  3.15377266 -4.54002603  2.35755463  4.60740722  2.33890619
+ -2.06926662  2.72639344 -3.73950679 -0.49109195  3.85092189 -1.94514083
+ -2.00017031 -3.48689856 -4.5298597   1.68548519 -2.71784098 -2.20967068
+ -0.0794211  -4.20945884  0.69854197 -3.32950474  0.84168486  1.88267819
+ -3.74790971 -0.81000323  1.83217832 -0.80884133 -4.24158872  0.33831566
+  1.54372816  0.14032658  4.19020686  0.81576204  3.80197348 -3.41672042
+ -3.39974033  2.89709464 -0.96437309 -3.15396239  4.02917345 -1.43477297
+  2.36384838  2.12998083  3.6125748   1.16558309  2.36507672 -1.42409958
+ -2.16837854  3.7311397  -0.67772457  4.38101423  1.54039983  1.14695514
+ -3.63093366  4.23633646 -0.47206702  0.73880471 -0.86579024 -2.47846232
+  3.80176242  0.6944128  -4.68533679  1.1040648 ]
+</code></pre><h3 id=圖表-9>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>fig <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>8</span>))
+</span></span><span style=display:flex><span>ax <span style=color:#f92672>=</span> fig<span style=color:#f92672>.</span>add_subplot(<span style=color:#ae81ff>111</span>, projection<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;3d&#39;</span>)
+</span></span><span style=display:flex><span>ax<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>],x[:, <span style=color:#ae81ff>2</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-10.png alt="alt text"></p><h2 id=稀疏編碼訊號-sparse-coded-signal>稀疏編碼訊號 (Sparse Coded Signal)</h2><p>測試稀疏表示和字典學習演算法</p><h3 id=資料集-10>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_sparse_coded_signal
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>Y, D, A <span style=color:#f92672>=</span> make_sparse_coded_signal(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>, <span style=color:#75715e># Y 產生資料的訊號</span>
+</span></span><span style=display:flex><span>    n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>, <span style=color:#75715e># D 產生資料的依據的字典</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># Y是訊號的數量和D是字典意思的數量</span>
+</span></span><span style=display:flex><span>    n_nonzero_coefs<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>, <span style=color:#75715e># A 產生訊號使用的字典數量稀疏碼</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-10>輸出</h3><h4 id=訊號>訊號</h4><pre tabindex=0><code>print(Y)
+</code></pre><p>資料</p><pre tabindex=0><code>[-0.1768291   0.63183219 -0.95412814  1.76314646 -1.80616521  0.7702895
+  0.66930768  0.88654417 -0.18298295 -0.77172361]
+</code></pre><h4 id=字典>字典</h4><pre tabindex=0><code>print(D)
+</code></pre><p>資料</p><pre tabindex=0><code>[ 1. -1. -1. -1.  1. -1.  1. -1.  1. -1.]
+</code></pre><h4 id=稀疏碼>稀疏碼</h4><pre tabindex=0><code>print(A)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ 0.          0.          0.          0.37299379  0.          0.53381091
+   0.          0.          0.7299756   0.        ]
+ [ 0.          0.         -0.08533806  0.          0.         -0.0919733
+   0.         -0.45452082  0.          0.        ]
+ [ 0.          0.          0.         -0.26788808  0.          0.
+   0.          0.53035547 -0.69166075  0.        ]
+ [ 0.         -1.09067489  0.          0.          0.          0.
+   0.          0.          0.27571804 -0.39675353]
+ [ 0.          0.          2.04202875  0.          0.68338423  0.44752069
+   0.          0.          0.          0.        ]
+ [ 0.          0.02288597 -1.1425182   0.          0.          0.
+  -0.34934272  0.          0.          0.        ]
+ [ 0.          1.33291008  0.          0.          0.         -0.68454025
+   0.         -1.3176775   0.          0.        ]
+ [ 0.          0.          0.          0.          1.25598233 -0.183537
+  -0.55297515  0.          0.          0.        ]
+ [ 0.          1.57814135  0.         -1.13745173  0.25770667  0.
+   0.          0.          0.          0.        ]
+ [ 0.          0.          0.18656139  0.41005165 -0.17511057  0.
+   0.          0.          0.          0.        ]]
+</code></pre><h3 id=圖表-10>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(Y,D,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-11.png alt="alt text"></p><h2 id=對稱正定-symmetric-positive-definite-spd>對稱正定 (Symmetric Positive Definite, SPD)</h2><p>模擬共變異數矩陣或在最佳化問題</p><h3 id=資料集-11>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_spd_matrix
+</span></span><span style=display:flex><span>X <span style=color:#f92672>=</span> make_spd_matrix(
+</span></span><span style=display:flex><span>    n_dim <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>,
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-11>輸出</h3><pre tabindex=0><code>print(X)
+</code></pre><p>資料</p><pre tabindex=0><code>[[ 0.75027514  0.01009931 -0.02614111 -0.25772253 -0.02799512 -0.25754167
+  -0.25802046  0.1223326   0.09618655  0.01120172]
+ [ 0.01009931  0.61417844  0.02790361  0.25259811  0.15018085  0.47985101
+   0.33463855 -0.31964234 -0.06557457  0.10864163]
+ [-0.02614111  0.02790361  0.5883984   0.01600364 -0.07965637 -0.05673431
+  -0.10280558  0.2518726  -0.05972569 -0.00816036]
+ [-0.25772253  0.25259811  0.01600364  1.96936493  1.10436953  2.12517461
+   1.90778937 -1.38485643 -0.66580285  0.55450369]
+ [-0.02799512  0.15018085 -0.07965637  1.10436953  1.12674004  1.42905312
+   1.17546643 -1.03364752 -0.33420209  0.34417359]
+ [-0.25754167  0.47985101 -0.05673431  2.12517461  1.42905312  4.1442362
+   3.13775189 -2.12651074 -0.86738869  0.69927145]
+ [-0.25802046  0.33463855 -0.10280558  1.90778937  1.17546643  3.13775189
+   3.04507974 -1.9030773  -0.74185234  0.77880005]
+ [ 0.1223326  -0.31964234  0.2518726  -1.38485643 -1.03364752 -2.12651074
+  -1.9030773   1.99971099  0.57849248 -0.62423489]
+ [ 0.09618655 -0.06557457 -0.05972569 -0.66580285 -0.33420209 -0.86738869
+  -0.74185234  0.57849248  0.90104381 -0.11827045]
+ [ 0.01120172  0.10864163 -0.00816036  0.55450369  0.34417359  0.69927145
+   0.77880005 -0.62423489 -0.11827045  0.67121437]]
+</code></pre><h3 id=圖表-11>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定顏色</span>
+</span></span><span style=display:flex><span>cm_bright <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>cm<span style=color:#f92672>.</span>Blues
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>matshow(X, cmap<span style=color:#f92672>=</span>cm_bright)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-13.png alt="alt text"></p><h2 id=瑞士捲-swiss-roll>瑞士捲 (Swiss Roll)</h2><p>模擬非線性、彎曲的流形</p><h3 id=資料集-12>資料集</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_swiss_roll
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定資料集</span>
+</span></span><span style=display:flex><span>x,y <span style=color:#f92672>=</span> make_swiss_roll(
+</span></span><span style=display:flex><span>    n_samples <span style=color:#f92672>=</span> <span style=color:#ae81ff>3000</span>,
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e>#設定種子碼</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=輸出-12>輸出</h3><pre tabindex=0><code>print(X)
+</code></pre><p>資料</p><pre tabindex=0><code>[[-6.13176456e+00  1.66631782e+01  6.09083115e+00]
+ [ 5.57158483e+00  7.53462128e-01 -1.00616626e+01]
+ [ 5.08091491e-03  4.01853643e+00 -4.71346420e+00]
+ ...
+ [-7.45579853e+00  5.50011411e-01  4.77715001e+00]
+ [ 6.29933004e+00  1.99673878e+01  1.07487851e-01]
+ [-9.33674374e+00  1.19682705e+01 -2.62568764e+00]]
+</code></pre><pre tabindex=0><code>print(y)
+</code></pre><p>資料</p><pre tabindex=0><code>[ 8.64272878 11.50128739  4.71346694 ...  8.85494742  6.30024703
+  9.69891846]
+</code></pre><h3 id=圖表-12>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e>#   設定圖表</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   設定圖表類型</span>
+</span></span><span style=display:flex><span>fig <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>8</span>))
+</span></span><span style=display:flex><span>ax <span style=color:#f92672>=</span> fig<span style=color:#f92672>.</span>add_subplot(<span style=color:#ae81ff>111</span>, projection<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;3d&#39;</span>)
+</span></span><span style=display:flex><span>ax<span style=color:#f92672>.</span>scatter(x[:, <span style=color:#ae81ff>0</span>],x[:, <span style=color:#ae81ff>1</span>],x[:, <span style=color:#ae81ff>2</span>], c<span style=color:#f92672>=</span>y,cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;k&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>#   顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-12.png alt="alt text"></p></div><footer><div><ul class=main_page_terms_ul_class><li class=main_page_terms_li_class><div>標籤:</div></li><ul class=main_page_terms_ul_class2><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>Python語言</div><a class=main_page_terms_a_class href=/tomku/tags/python%E8%AA%9E%E8%A8%80/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>筆記</div><a class=main_page_terms_a_class href=/tomku/tags/%E7%AD%86%E8%A8%98/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>AI</div><a class=main_page_terms_a_class href=/tomku/tags/ai/></a></li></ul></ul></div><nav class=main_page_section_nav_class><a class=main_page_section_a_class href=/tomku/python/notes/08/><samp>上一頁</samp><br><samp>python語言的筆記-matplotlib</samp><br><samp><time datetime=2025-07-09T19:32:02+08:00>2025-07-09</time>
+</samp></a><a class=main_page_section_a_class2 href=/tomku/python/notes/10/><samp>下一頁</samp><br><samp>python語言的筆記-scikit-learn監督式學習</samp><br><samp><time datetime=2025-07-13T22:47:16+08:00>2025-07-13</time></samp></a></nav></footer></article></section></div><aside class="main right_aside_class"><div class=right_div_class><details class=right_details_class open><summary class=right_details_class>目錄</summary><nav id=TableOfContents><ul><li><a href=#scikit-learn數據集>scikit-learn數據集</a><ul><li><a href=#雙向聚類-biclustering>雙向聚類 (Biclustering)</a><ul><li><a href=#資料集>資料集</a></li><li><a href=#輸出>輸出</a></li><li><a href=#圖表>圖表</a></li></ul></li><li><a href=#聚類分析>聚類分析</a><ul><li><a href=#資料集-1>資料集</a></li><li><a href=#輸出-1>輸出</a></li><li><a href=#圖表-1>圖表</a></li></ul></li><li><a href=#同心圓形數據集>同心圓形數據集</a><ul><li><a href=#資料集-2>資料集</a></li><li><a href=#輸出-2>輸出</a></li><li><a href=#圖表-2>圖表</a></li></ul></li><li><a href=#分類任務>分類任務</a><ul><li><a href=#資料集-3>資料集</a></li><li><a href=#輸出-3>輸出</a></li><li><a href=#圖表-3>圖表</a></li></ul></li><li><a href=#多類別分類數據集>多類別分類數據集</a><ul><li><a href=#資料集-4>資料集</a></li><li><a href=#輸出-4>輸出</a></li><li><a href=#圖表-4>圖表</a></li></ul></li><li><a href=#低秩-low-rank>低秩 (low-rank)</a><ul><li><a href=#資料集-5>資料集</a></li><li><a href=#輸出-5>輸出</a></li><li><a href=#圖表-5>圖表</a></li></ul></li><li><a href=#半月形數據集>半月形數據集</a><ul><li><a href=#資料集-6>資料集</a></li><li><a href=#輸出-6>輸出</a></li><li><a href=#圖表-6>圖表</a></li></ul></li><li><a href=#多標籤分類-multi-label-classification>多標籤分類 (Multi-label Classification)</a><ul><li><a href=#資料集-7>資料集</a></li><li><a href=#輸出-7>輸出</a></li><li><a href=#圖表-7>圖表</a></li></ul></li><li><a href=#合成回歸-regression>合成回歸 (Regression)</a><ul><li><a href=#資料集-8>資料集</a></li><li><a href=#輸出-8>輸出</a></li><li><a href=#圖表-8>圖表</a></li></ul></li><li><a href=#流形學習-manifold-learning>流形學習 (Manifold Learning)</a><ul><li><a href=#資料集-9>資料集</a></li><li><a href=#輸出-9>輸出</a></li><li><a href=#圖表-9>圖表</a></li></ul></li><li><a href=#稀疏編碼訊號-sparse-coded-signal>稀疏編碼訊號 (Sparse Coded Signal)</a><ul><li><a href=#資料集-10>資料集</a></li><li><a href=#輸出-10>輸出</a></li><li><a href=#圖表-10>圖表</a></li></ul></li><li><a href=#對稱正定-symmetric-positive-definite-spd>對稱正定 (Symmetric Positive Definite, SPD)</a><ul><li><a href=#資料集-11>資料集</a></li><li><a href=#輸出-11>輸出</a></li><li><a href=#圖表-11>圖表</a></li></ul></li><li><a href=#瑞士捲-swiss-roll>瑞士捲 (Swiss Roll)</a><ul><li><a href=#資料集-12>資料集</a></li><li><a href=#輸出-12>輸出</a></li><li><a href=#圖表-12>圖表</a></li></ul></li></ul></li></ul></nav></details></div><div class=right_div_class><details class=right_related_details_class open><summary class=right_related_details_class>相關文章</summary><nav class=right_related_page_nav_class><ol class=right_related_page_ol_class></ol><hr></nav></details></div></aside></main><footer class=baseof_footer_class><center><p>Copyright @2024-2025 tomku的網誌 Powered by <a href=https://gohugo.io/>Hugo</a></p><p xmlns:cc=http://creativecommons.org/ns# xmlns:dct=http://purl.org/dc/terms/>Except where otherwise noted, <span property="dct:title">tomku的網誌</span> by <span property="cc:attributionName">YU-LUN KU</span> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target=_blank rel="license noopener noreferrer" style=display:inline-block>Attribution-ShareAlike 4.0 International<img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p><p>若有需聯絡請寄信到tom8760925@gmail.com</p><p>若分享內容有侵害您的著作權，請來信告知，我將儘速移除相關內容</p></center></footer></body></html>

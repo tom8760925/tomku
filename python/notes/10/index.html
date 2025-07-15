@@ -1,0 +1,968 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>python語言的筆記-scikit-learn監督式學習 | tomku的網誌
+</title><link rel=stylesheet href=/tomku/css/cssall.min.6db1d46d747ddea4cd158fef8a0e6f577651a77ebbe8bf96fc205497064d9dcf.css><script src=/tomku/js/main.js></script><script src=/tomku/js/header.js></script></head><body><header class=baseof_header_class><nav class=header_nav_class><div id=header_div_left class=header_div_class><a href=/tomku/><h1 class=header_h1_class>tomku的網誌</h1></a></div><div id=header_div_right class=header_div_class><ul class=header_menu_ul_class><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/>首頁</a></li><li class=header_menu_li_class><a class=header_menu_a_class2 onclick='displaymenu("header_menu_li_class_1")'>程式</a><ul id=header_menu_li_class_1 class=header_menu_ul_class2><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/c/>C</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/c++/>C++</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/golang/>golang</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/java/>java</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/python/>python</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/csharp/>csharp</a></li></ul></li><li class=header_menu_li_class><a class=header_menu_a_class2 onclick='displaymenu("header_menu_li_class_2")'>其他</a><ul id=header_menu_li_class_2 class=header_menu_ul_class2><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/esp/>esp</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/git/>git</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/hugo/>hugo</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/mysql/>mysql</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/minecraft/>minecraft</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/other/>other</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/qt/>qt</a></li></ul></li><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/tags/>標籤</a></li><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/about/>關於</a></li></ul></div></nav></header><main class=baseof_main_class><aside class="main left_aside_class"><div class=left_div_class3><button class=left_button_class onclick=displayleft()>☰</button></div><div id=left_div_class4 class=left_div_class4><div class=left_div_class><div class=left_div_class2>個人連結</div><div class=left_social_div_class><ul class=left_social_ul_class><li class=left_social_li_class><a href=https://github.com/tom8760925 class=left_social_a_class>github</a></li><li class=left_social_li_class><a href=https://www.notion.so/tomku-1dafd63b811e80debc8fe145cc6d494a class=left_social_a_class>副網誌</a></li></ul></div></div><div class=left_div_class><div class=left_div_class2>最新文章</div><nav><ul class=left_recent_ul_class><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/11/>python語言的筆記-scikit-learn非監督學習</a></header><footer class=left_recent_footer_class><time datetime=2025-07-15T23:10:10+08:00>2025-07-15</time></footer><a class=left_recent_a_class href=/tomku/python/notes/11/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/10/>python語言的筆記-scikit-learn監督式學習</a></header><footer class=left_recent_footer_class><time datetime=2025-07-13T22:47:16+08:00>2025-07-13</time></footer><a class=left_recent_a_class href=/tomku/python/notes/10/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/c++/practice/problems39/>C++語言的練習-練習實作Validate Binary Search Tree</a></header><footer class=left_recent_footer_class><time datetime=2025-07-11T10:41:14+08:00>2025-07-11</time></footer><a class=left_recent_a_class href=/tomku/c++/practice/problems39/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/c++/practice/problems38/>C++語言的練習-練習實作Binary Tree Maximum Path Sum</a></header><footer class=left_recent_footer_class><time datetime=2025-07-10T11:43:07+08:00>2025-07-10</time></footer><a class=left_recent_a_class href=/tomku/c++/practice/problems38/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/09/>python語言的筆記-scikit-learn數據集</a></header><footer class=left_recent_footer_class><time datetime=2025-07-09T19:45:38+08:00>2025-07-09</time></footer><a class=left_recent_a_class href=/tomku/python/notes/09/></a></article></li></ul></nav></div><div class=left_div_class><div class=left_div_class2>標籤</div><div class=left_tags_div_class><a href=/tomku/categories/c++%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>C++語言<sup>157</sup>
+</a><a href=/tomku/categories/cmake/ class=left_tags_a_class>Cmake<sup>2</sup>
+</a><a href=/tomku/categories/csharp%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Csharp語言<sup>1</sup>
+</a><a href=/tomku/categories/c%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>C語言<sup>22</sup>
+</a><a href=/tomku/categories/esp/ class=left_tags_a_class>Esp<sup>9</sup>
+</a><a href=/tomku/categories/git/ class=left_tags_a_class>Git<sup>1</sup>
+</a><a href=/tomku/categories/golang%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Golang語言<sup>20</sup>
+</a><a href=/tomku/categories/hugo/ class=left_tags_a_class>Hugo<sup>2</sup>
+</a><a href=/tomku/categories/linux/ class=left_tags_a_class>Linux<sup>30</sup>
+</a><a href=/tomku/categories/minecraft/ class=left_tags_a_class>Minecraft<sup>6</sup>
+</a><a href=/tomku/categories/mysql/ class=left_tags_a_class>Mysql<sup>3</sup>
+</a><a href=/tomku/categories/proxomx/ class=left_tags_a_class>Proxomx<sup>3</sup>
+</a><a href=/tomku/categories/python%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Python語言<sup>12</sup>
+</a><a href=/tomku/categories/qt/ class=left_tags_a_class>Qt<sup>11</sup>
+</a><a href=/tomku/categories/xcode/ class=left_tags_a_class>Xcode<sup>3</sup>
+</a><a href=/tomku/categories/%E5%85%B6%E4%BB%96/ class=left_tags_a_class>其他<sup>1</sup>
+</a><a href=/tomku/categories/%E9%97%9C%E6%96%BC/ class=left_tags_a_class>關於<sup>1</sup></a></div></div></div></aside><div class="main main_div_class"><section class=main_page_section_class><article><header><div class=main_page_breadcrumb_div_class><a href=/tomku/>簡介
+</a>/<a href=/tomku/python/>Pythons
+</a>/</div><h1 class=main_page_h1_class>python語言的筆記-scikit-learn監督式學習</h1></header><time class=main_page_time_class datetime=2025-07-13T22:47:16+08:00>2025-07-13</time><div class=main_page_div_class2><h1 id=scikit-learn監督式學習>scikit-learn監督式學習</h1><p>這篇是python的筆記第10篇</p><h2 id=線性模型linear-models>線性模型(Linear Models)</h2><p>計算y = ax + b，計算出點的中心線</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.linear_model <span style=color:#f92672>import</span> LinearRegression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>20</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> LinearRegression() <span style=color:#75715e># 訓練y = ax + b</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的500的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()  
+</span></span></code></pre></div><p>輸出</p><p><img src=image.png alt="alt text"></p><h2 id=線性和二次判別分析linear-and-quadratic-discriminant-analysis>線性和二次判別分析(Linear and Quadratic Discriminant Analysis)</h2><p>用直線和曲線畫分類</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.discriminant_analysis <span style=color:#f92672>import</span> LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>lda_model <span style=color:#f92672>=</span> LinearDiscriminantAnalysis()
+</span></span><span style=display:flex><span>lda_model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> lda_model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-1.png alt="alt text"></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#75715e># 訓練LDA 模型</span>
+</span></span><span style=display:flex><span>qda_model <span style=color:#f92672>=</span> QuadraticDiscriminantAnalysis()
+</span></span><span style=display:flex><span>qda_model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> qda_model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;訓練資料&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;測試資料&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-2.png alt="alt text"></p><h2 id=核心脊迴歸-kernel-ridge-regression-krr>核心脊迴歸 (Kernel Ridge Regression, KRR)</h2><p>找出最佳擬合曲線或曲面</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.kernel_ridge <span style=color:#f92672>import</span> KernelRidge
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> KernelRidge(kernel<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;rbf&#39;</span>) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()                              
+</span></span></code></pre></div><p>輸出</p><p><img src=image-4.png alt="alt text"></p><h2 id=支持向量機-svm>支持向量機 (SVM)</h2><p>找出最佳決策邊界</p><h3 id=分類>分類</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn <span style=color:#f92672>import</span> svm
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> svm<span style=color:#f92672>.</span>SVC()
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()                           
+</span></span></code></pre></div><p>輸出</p><p><img src=image-3.png alt="alt text"></p><h3 id=回歸>回歸</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn <span style=color:#f92672>import</span> svm
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>20</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> svm<span style=color:#f92672>.</span>SVR(kernel<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;rbf&#39;</span>, C<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>)
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()     
+</span></span></code></pre></div><p>輸出</p><p><img src=image-5.png alt="alt text"></p><h2 id=k-近鄰-k-nearest-neighbors-knn>K 近鄰 (K-Nearest Neighbors, KNN)</h2><p>物以類聚</p><h3 id=分類-1>分類</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.neighbors <span style=color:#f92672>import</span> KNeighborsClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> KNeighborsClassifier()
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()                      
+</span></span></code></pre></div><p>輸出</p><p><img src=image-6.png alt="alt text"></p><h3 id=回歸-1>回歸</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.neighbors <span style=color:#f92672>import</span> KNeighborsRegressor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> KNeighborsRegressor() <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()                             
+</span></span></code></pre></div><p>輸出</p><p><img src=image-7.png alt="alt text"></p><h2 id=高斯過程-gaussian-processes-gp>高斯過程 (Gaussian Processes, GP)</h2><p>高斯分佈</p><h3 id=分類-2>分類</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.gaussian_process <span style=color:#f92672>import</span> GaussianProcessClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> GaussianProcessClassifier()
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()                    
+</span></span></code></pre></div><p>輸出</p><p><img src=image-8.png alt="alt text"></p><h3 id=回歸-2>回歸</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.gaussian_process <span style=color:#f92672>import</span> GaussianProcessRegressor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.gaussian_process.kernels <span style=color:#f92672>import</span> RBF, ConstantKernel, WhiteKernel
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>kernel <span style=color:#f92672>=</span> ConstantKernel(<span style=color:#ae81ff>1.0</span>) <span style=color:#f92672>*</span> RBF(length_scale<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0</span>) <span style=color:#f92672>+</span> WhiteKernel(noise_level<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型，並讓它在訓練過程中優化核函數的參數，包括 noise_level</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> GaussianProcessRegressor(kernel<span style=color:#f92672>=</span>kernel,n_restarts_optimizer<span style=color:#f92672>=</span><span style=color:#ae81ff>20</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># --- 關鍵修改點 END ---</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()                             
+</span></span></code></pre></div><p>輸出</p><p><img src=image-9.png alt="alt text"></p><h2 id=交叉分解-cross-decomposition>交叉分解？ (Cross-decomposition)</h2><p>同時分析和建模多個數據塊之間的關係</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.cross_decomposition <span style=color:#f92672>import</span> PLSRegression
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> PLSRegression(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()   
+</span></span></code></pre></div><p>輸出</p><p><img src=image-10.png alt="alt text"></p><h2 id=樸素貝葉斯-naive-bayes>樸素貝葉斯 (Naive Bayes)</h2><p>貝葉斯定理</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.naive_bayes <span style=color:#f92672>import</span> GaussianNB
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> GaussianNB()
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-11.png alt="alt text"></p><h2 id=決策樹-decision-tree>決策樹 (Decision Tree)</h2><p>數據劃分成不同類別或預測數值</p><h3 id=分類-3>分類</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.tree <span style=color:#f92672>import</span> DecisionTreeClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> DecisionTreeClassifier(max_depth<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-12.png alt="alt text"></p><h3 id=回歸-3>回歸</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.tree <span style=color:#f92672>import</span> DecisionTreeRegressor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型，並讓它在訓練過程中優化核函數的參數，包括 noise_level</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> DecisionTreeRegressor()
+</span></span><span style=display:flex><span><span style=color:#75715e># --- 關鍵修改點 END ---</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()   
+</span></span></code></pre></div><p>輸出</p><p><img src=image-13.png alt="alt text"></p><h2 id=集成方法-ensemble-methods>集成方法 (Ensemble Methods)</h2><p>集成方法透過結合多個獨立模型的預測結果</p><h3 id=套袋法-bagging---bootstrap-aggregating>套袋法 (Bagging - Bootstrap Aggregating)</h3><p>隨機抽取多個子樣本集</p><h4 id=分類-4>分類</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.ensemble <span style=color:#f92672>import</span> RandomForestClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> RandomForestClassifier(random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-14.png alt="alt text"></p><h4 id=回歸-4>回歸</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.ensemble <span style=color:#f92672>import</span> RandomForestRegressor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型，並讓它在訓練過程中優化核函數的參數，包括 noise_level</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> RandomForestRegressor()
+</span></span><span style=display:flex><span><span style=color:#75715e># --- 關鍵修改點 END ---</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()   
+</span></span></code></pre></div><p>輸出</p><p><img src=image-15.png alt="alt text"></p><h3 id=提升法-boosting>提升法 (Boosting)</h3><p>加權組合</p><h4 id=分類-5>分類</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.ensemble <span style=color:#f92672>import</span> GradientBoostingClassifier 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> GradientBoostingClassifier (random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-16.png alt="alt text"></p><h4 id=回歸-5>回歸</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.ensemble <span style=color:#f92672>import</span> GradientBoostingRegressor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型，並讓它在訓練過程中優化核函數的參數，包括 noise_level</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> GradientBoostingRegressor()
+</span></span><span style=display:flex><span><span style=color:#75715e># --- 關鍵修改點 END ---</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()   
+</span></span></code></pre></div><p>輸出</p><p><img src=image-17.png alt="alt text"></p><h2 id=半監督學習-semi-supervised-learning>半監督學習 (Semi-supervised Learning)</h2><p>利用少量帶標籤數據和大量無標籤數據進行訓練</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.semi_supervised <span style=color:#f92672>import</span> LabelPropagation
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> LabelPropagation()
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-18.png alt="alt text"></p><h2 id=等滲回歸-isotonic-regression>等滲回歸 (Isotonic Regression)</h2><p>「等張」或「等壓」</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.isotonic <span style=color:#f92672>import</span> IsotonicRegression
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> IsotonicRegression() <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()                               
+</span></span></code></pre></div><p>輸出</p><p><img src=image-19.png alt="alt text"></p><h2 id=監督式神經網路-supervised-neural-networks>監督式神經網路 (Supervised Neural Networks)</h2><p>人工神經網路 ANN</p><h3 id=分類-6>分類</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_classification
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.neural_network <span style=color:#f92672>import</span> MLPClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib.colors <span style=color:#f92672>import</span> ListedColormap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_classification(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,      <span style=color:#75715e># 200 個樣本</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,       <span style=color:#75715e># 2 個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,    <span style=color:#75715e># 使用2個特徵</span>
+</span></span><span style=display:flex><span>    n_redundant<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,      <span style=color:#75715e># 沒有冗餘特徵</span>
+</span></span><span style=display:flex><span>    n_clusters_per_class<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 每個類別只有一個簇</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>     <span style=color:#75715e># 固定隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定顏色</span>
+</span></span><span style=display:flex><span>cmap_bold <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FF0000&#39;</span>, <span style=color:#e6db74>&#39;#0000FF&#39;</span>])
+</span></span><span style=display:flex><span>cmap_light <span style=color:#f92672>=</span> ListedColormap([<span style=color:#e6db74>&#39;#FFAAAA&#39;</span>, <span style=color:#e6db74>&#39;#AAAAFF&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集1和2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練集最小值到最大值之間以0.02區間生成點</span>
+</span></span><span style=display:flex><span>X_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span>Y_a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>min() <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, X_train[:, <span style=color:#ae81ff>1</span>]<span style=color:#f92672>.</span>max() <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.02</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將兩個1維轉換2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x[1,2],y[3,4] -&gt; xx[[1,2],[1,2]],yy[[3,3],[4,4]]</span>
+</span></span><span style=display:flex><span>xx, yy <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>meshgrid(X_a,Y_a)
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> MLPClassifier()
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得z</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 先將2維轉1維，再將兩個1維合併2維</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># xx[[1,2],[1,2]],yy[[3,3],[4,4]] -&gt; [1,3],[1,4],[2,3],[2,4]</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(np<span style=color:#f92672>.</span>c_[xx<span style=color:#f92672>.</span>ravel(), yy<span style=color:#f92672>.</span>ravel()])
+</span></span><span style=display:flex><span><span style=color:#75715e># 轉換</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據範圍將1維轉換2維</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> Z<span style=color:#f92672>.</span>reshape(xx<span style=color:#f92672>.</span>shape)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫範圍</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>pcolormesh(xx, yy, Z, cmap<span style=color:#f92672>=</span>cmap_light, shading<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train[:, <span style=color:#ae81ff>0</span>], X_train[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_train, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test[:, <span style=color:#ae81ff>0</span>], X_test[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y_test, cmap<span style=color:#f92672>=</span>cmap_bold,s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>, edgecolors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;w&#39;</span>, linewidth<span style=color:#f92672>=</span><span style=color:#ae81ff>1.5</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-20.png alt="alt text"></p><h3 id=回歸-6>回歸</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt 
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np              
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_regression 
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.neural_network <span style=color:#f92672>import</span> MLPRegressor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集</span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_regression(
+</span></span><span style=display:flex><span>    n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 生成100的點</span>
+</span></span><span style=display:flex><span>    n_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 1個特徵</span>
+</span></span><span style=display:flex><span>    n_informative<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, <span style=color:#75715e># 使用1個特徵</span>
+</span></span><span style=display:flex><span>    noise<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, <span style=color:#75715e># 雜訊值</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料集分為訓練集和驗證集以7：3分</span>
+</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 訓練模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> MLPRegressor(
+</span></span><span style=display:flex><span>    hidden_layer_sizes<span style=color:#f92672>=</span>(<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>50</span>), <span style=color:#75715e># 兩個隱藏層</span>
+</span></span><span style=display:flex><span>    learning_rate_init<span style=color:#f92672>=</span><span style=color:#ae81ff>0.01</span>,     <span style=color:#75715e># 初始學習率</span>
+</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>             <span style=color:#75715e># 隨機種子</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>fit(X_train, y_train) <span style=color:#75715e># 訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示訓練集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_train, y_train, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;blue&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示驗證集的點</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X_test, y_test, s<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>,  color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得最小值到最大值的2的點一維之後，變成一個點一維的二維</span>
+</span></span><span style=display:flex><span>X_plot <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(X<span style=color:#f92672>.</span>min(), X<span style=color:#f92672>.</span>max(), <span style=color:#ae81ff>500</span>)<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 根據訓練的取得y</span>
+</span></span><span style=display:flex><span>y_plot_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(X_plot)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 畫線</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X_plot, y_plot_pred, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;red&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># 顯示</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()   
+</span></span></code></pre></div><p>輸出</p><p><img src=image-21.png alt="alt text"></p></div><footer><div><ul class=main_page_terms_ul_class><li class=main_page_terms_li_class><div>標籤:</div></li><ul class=main_page_terms_ul_class2><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>Python語言</div><a class=main_page_terms_a_class href=/tomku/tags/python%E8%AA%9E%E8%A8%80/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>筆記</div><a class=main_page_terms_a_class href=/tomku/tags/%E7%AD%86%E8%A8%98/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>AI</div><a class=main_page_terms_a_class href=/tomku/tags/ai/></a></li></ul></ul></div><nav class=main_page_section_nav_class><a class=main_page_section_a_class href=/tomku/python/notes/09/><samp>上一頁</samp><br><samp>python語言的筆記-scikit-learn數據集</samp><br><samp><time datetime=2025-07-09T19:45:38+08:00>2025-07-09</time>
+</samp></a><a class=main_page_section_a_class2 href=/tomku/python/notes/11/><samp>下一頁</samp><br><samp>python語言的筆記-scikit-learn非監督學習</samp><br><samp><time datetime=2025-07-15T23:10:10+08:00>2025-07-15</time></samp></a></nav></footer></article></section></div><aside class="main right_aside_class"><div class=right_div_class><details class=right_details_class open><summary class=right_details_class>目錄</summary><nav id=TableOfContents><ul><li><a href=#scikit-learn監督式學習>scikit-learn監督式學習</a><ul><li><a href=#線性模型linear-models>線性模型(Linear Models)</a></li><li><a href=#線性和二次判別分析linear-and-quadratic-discriminant-analysis>線性和二次判別分析(Linear and Quadratic Discriminant Analysis)</a></li><li><a href=#核心脊迴歸-kernel-ridge-regression-krr>核心脊迴歸 (Kernel Ridge Regression, KRR)</a></li><li><a href=#支持向量機-svm>支持向量機 (SVM)</a><ul><li><a href=#分類>分類</a></li><li><a href=#回歸>回歸</a></li></ul></li><li><a href=#k-近鄰-k-nearest-neighbors-knn>K 近鄰 (K-Nearest Neighbors, KNN)</a><ul><li><a href=#分類-1>分類</a></li><li><a href=#回歸-1>回歸</a></li></ul></li><li><a href=#高斯過程-gaussian-processes-gp>高斯過程 (Gaussian Processes, GP)</a><ul><li><a href=#分類-2>分類</a></li><li><a href=#回歸-2>回歸</a></li></ul></li><li><a href=#交叉分解-cross-decomposition>交叉分解？ (Cross-decomposition)</a></li><li><a href=#樸素貝葉斯-naive-bayes>樸素貝葉斯 (Naive Bayes)</a></li><li><a href=#決策樹-decision-tree>決策樹 (Decision Tree)</a><ul><li><a href=#分類-3>分類</a></li><li><a href=#回歸-3>回歸</a></li></ul></li><li><a href=#集成方法-ensemble-methods>集成方法 (Ensemble Methods)</a><ul><li><a href=#套袋法-bagging---bootstrap-aggregating>套袋法 (Bagging - Bootstrap Aggregating)</a></li><li><a href=#提升法-boosting>提升法 (Boosting)</a></li></ul></li><li><a href=#半監督學習-semi-supervised-learning>半監督學習 (Semi-supervised Learning)</a></li><li><a href=#等滲回歸-isotonic-regression>等滲回歸 (Isotonic Regression)</a></li><li><a href=#監督式神經網路-supervised-neural-networks>監督式神經網路 (Supervised Neural Networks)</a><ul><li><a href=#分類-6>分類</a></li><li><a href=#回歸-6>回歸</a></li></ul></li></ul></li></ul></nav></details></div><div class=right_div_class><details class=right_related_details_class open><summary class=right_related_details_class>相關文章</summary><nav class=right_related_page_nav_class><ol class=right_related_page_ol_class></ol><hr></nav></details></div></aside></main><footer class=baseof_footer_class><center><p>Copyright @2024-2025 tomku的網誌 Powered by <a href=https://gohugo.io/>Hugo</a></p><p xmlns:cc=http://creativecommons.org/ns# xmlns:dct=http://purl.org/dc/terms/>Except where otherwise noted, <span property="dct:title">tomku的網誌</span> by <span property="cc:attributionName">YU-LUN KU</span> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target=_blank rel="license noopener noreferrer" style=display:inline-block>Attribution-ShareAlike 4.0 International<img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p><p>若有需聯絡請寄信到tom8760925@gmail.com</p><p>若分享內容有侵害您的著作權，請來信告知，我將儘速移除相關內容</p></center></footer></body></html>
