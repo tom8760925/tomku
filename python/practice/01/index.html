@@ -1,0 +1,637 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>python語言的練習-練習實作scikit-learn比較模型 | tomku的網誌
+</title><link rel=stylesheet href=/tomku/css/cssall.min.6db1d46d747ddea4cd158fef8a0e6f577651a77ebbe8bf96fc205497064d9dcf.css><script src=/tomku/js/main.js></script><script src=/tomku/js/header.js></script></head><body><header class=baseof_header_class><nav class=header_nav_class><div id=header_div_left class=header_div_class><a href=/tomku/><h1 class=header_h1_class>tomku的網誌</h1></a></div><div id=header_div_right class=header_div_class><ul class=header_menu_ul_class><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/>首頁</a></li><li class=header_menu_li_class><a class=header_menu_a_class2 onclick='displaymenu("header_menu_li_class_1")'>程式</a><ul id=header_menu_li_class_1 class=header_menu_ul_class2><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/c/>C</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/c++/>C++</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/golang/>golang</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/java/>java</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/python/>python</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/csharp/>csharp</a></li></ul></li><li class=header_menu_li_class><a class=header_menu_a_class2 onclick='displaymenu("header_menu_li_class_2")'>其他</a><ul id=header_menu_li_class_2 class=header_menu_ul_class2><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/esp/>esp</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/git/>git</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/hugo/>hugo</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/mysql/>mysql</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/minecraft/>minecraft</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/other/>other</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/qt/>qt</a></li></ul></li><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/tags/>標籤</a></li><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/about/>關於</a></li></ul></div></nav></header><main class=baseof_main_class><aside class="main left_aside_class"><div class=left_div_class3><button class=left_button_class onclick=displayleft()>☰</button></div><div id=left_div_class4 class=left_div_class4><div class=left_div_class><div class=left_div_class2>個人連結</div><div class=left_social_div_class><ul class=left_social_ul_class><li class=left_social_li_class><a href=https://github.com/tom8760925 class=left_social_a_class>github</a></li><li class=left_social_li_class><a href=https://www.notion.so/tomku-1dafd63b811e80debc8fe145cc6d494a class=left_social_a_class>副網誌</a></li></ul></div></div><div class=left_div_class><div class=left_div_class2>最新文章</div><nav><ul class=left_recent_ul_class><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/practice/01/>python語言的練習-練習實作scikit-learn比較模型</a></header><footer class=left_recent_footer_class><time datetime=2025-07-17T13:05:26+08:00>2025-07-17</time></footer><a class=left_recent_a_class href=/tomku/python/practice/01/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/11/>python語言的筆記-scikit-learn非監督學習</a></header><footer class=left_recent_footer_class><time datetime=2025-07-15T23:10:10+08:00>2025-07-15</time></footer><a class=left_recent_a_class href=/tomku/python/notes/11/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/10/>python語言的筆記-scikit-learn監督式學習</a></header><footer class=left_recent_footer_class><time datetime=2025-07-13T22:47:16+08:00>2025-07-13</time></footer><a class=left_recent_a_class href=/tomku/python/notes/10/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/c++/practice/problems39/>C++語言的練習-練習實作Validate Binary Search Tree</a></header><footer class=left_recent_footer_class><time datetime=2025-07-11T10:41:14+08:00>2025-07-11</time></footer><a class=left_recent_a_class href=/tomku/c++/practice/problems39/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/c++/practice/problems38/>C++語言的練習-練習實作Binary Tree Maximum Path Sum</a></header><footer class=left_recent_footer_class><time datetime=2025-07-10T11:43:07+08:00>2025-07-10</time></footer><a class=left_recent_a_class href=/tomku/c++/practice/problems38/></a></article></li></ul></nav></div><div class=left_div_class><div class=left_div_class2>標籤</div><div class=left_tags_div_class><a href=/tomku/categories/c++%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>C++語言<sup>157</sup>
+</a><a href=/tomku/categories/cmake/ class=left_tags_a_class>Cmake<sup>2</sup>
+</a><a href=/tomku/categories/csharp%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Csharp語言<sup>1</sup>
+</a><a href=/tomku/categories/c%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>C語言<sup>22</sup>
+</a><a href=/tomku/categories/esp/ class=left_tags_a_class>Esp<sup>9</sup>
+</a><a href=/tomku/categories/git/ class=left_tags_a_class>Git<sup>1</sup>
+</a><a href=/tomku/categories/golang%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Golang語言<sup>20</sup>
+</a><a href=/tomku/categories/hugo/ class=left_tags_a_class>Hugo<sup>2</sup>
+</a><a href=/tomku/categories/linux/ class=left_tags_a_class>Linux<sup>30</sup>
+</a><a href=/tomku/categories/minecraft/ class=left_tags_a_class>Minecraft<sup>6</sup>
+</a><a href=/tomku/categories/mysql/ class=left_tags_a_class>Mysql<sup>3</sup>
+</a><a href=/tomku/categories/proxomx/ class=left_tags_a_class>Proxomx<sup>3</sup>
+</a><a href=/tomku/categories/python%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Python語言<sup>13</sup>
+</a><a href=/tomku/categories/qt/ class=left_tags_a_class>Qt<sup>11</sup>
+</a><a href=/tomku/categories/xcode/ class=left_tags_a_class>Xcode<sup>3</sup>
+</a><a href=/tomku/categories/%E5%85%B6%E4%BB%96/ class=left_tags_a_class>其他<sup>1</sup>
+</a><a href=/tomku/categories/%E9%97%9C%E6%96%BC/ class=left_tags_a_class>關於<sup>1</sup></a></div></div></div></aside><div class="main main_div_class"><section class=main_page_section_class><article><header><div class=main_page_breadcrumb_div_class><a href=/tomku/>簡介
+</a>/<a href=/tomku/python/>Pythons
+</a>/<a href=/tomku/python/practice/>練習實作
+</a>/</div><h1 class=main_page_h1_class>python語言的練習-練習實作scikit-learn比較模型</h1></header><time class=main_page_time_class datetime=2025-07-17T13:05:26+08:00>2025-07-17</time><div class=main_page_div_class2><h1 id=scikit-learn比較模型>scikit-learn比較模型</h1><p>這篇是python的練習實作第01篇</p><p>用scikit-learn的fetch_20newsgroups資料集比較模型準確度</p><h2 id=比較>比較</h2><p>全部都在不調整的情況下執行</p><h3 id=表格>表格</h3><table><thead><tr><th>模型</th><th>準確度</th><th>時間</th></tr></thead><tbody><tr><td>多項式樸素貝葉斯</td><td>0.7739</td><td>22.2s</td></tr><tr><td>多類分類</td><td>0.8186</td><td>4m21.5s</td></tr><tr><td>決策樹分類器</td><td>0.5548</td><td>24.8s</td></tr><tr><td>隨機森林分類器</td><td>0.7638</td><td>40.1s</td></tr><tr><td>K鄰居分類器</td><td>0.6592</td><td>18.2s</td></tr><tr><td>線性SVC</td><td>0.8532</td><td>16.5s</td></tr><tr><td>隨機森林</td><td>0.7584</td><td>19.4s</td></tr><tr><td>邏輯回歸</td><td>0.8278</td><td>33.5s</td></tr></tbody></table><h3 id=結果>結果</h3><p>線性SVC在不調整時準確度就有0.8532，而且時間只要16.5s。</p><h2 id=多項式樸素貝葉斯>多項式樸素貝葉斯</h2><p>模型準確度: 0.7739
+執行時間: 22.2s</p><h3 id=執行>執行</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.naive_bayes <span style=color:#f92672>import</span> MultinomialNB
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> fetch_20newsgroups
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>filename <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;MultinomialNB&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>newsgroups_train <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;train&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>newsgroups_test <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;test&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;訓練集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;測試集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_test<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;總類別數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>target_names)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model_pipeline <span style=color:#f92672>=</span> make_pipeline(TfidfVectorizer(), MultinomialNB())
+</span></span><span style=display:flex><span>model_pipeline<span style=color:#f92672>.</span>fit(newsgroups_train<span style=color:#f92672>.</span>data, newsgroups_train<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> model_pipeline<span style=color:#f92672>.</span>predict(newsgroups_test<span style=color:#f92672>.</span>data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(classification_report(newsgroups_test<span style=color:#f92672>.</span>target, y_pred,
+</span></span><span style=display:flex><span>                            labels<span style=color:#f92672>=</span>np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target),
+</span></span><span style=display:flex><span>                            target_names<span style=color:#f92672>=</span>newsgroups_train<span style=color:#f92672>.</span>target_names))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>accuracy <span style=color:#f92672>=</span> accuracy_score(newsgroups_test<span style=color:#f92672>.</span>target, y_pred)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>模型準確度: </span><span style=color:#e6db74>{</span>accuracy<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p>輸出</p><pre tabindex=0><code>訓練集樣本數: 11314
+測試集樣本數: 7532
+總類別數: 20
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.80      0.52      0.63       319
+           comp.graphics       0.81      0.65      0.72       389
+ comp.os.ms-windows.misc       0.82      0.65      0.73       394
+comp.sys.ibm.pc.hardware       0.67      0.78      0.72       392
+   comp.sys.mac.hardware       0.86      0.77      0.81       385
+          comp.windows.x       0.89      0.75      0.82       395
+            misc.forsale       0.93      0.69      0.80       390
+               rec.autos       0.85      0.92      0.88       396
+         rec.motorcycles       0.94      0.93      0.93       398
+      rec.sport.baseball       0.92      0.90      0.91       397
+        rec.sport.hockey       0.89      0.97      0.93       399
+               sci.crypt       0.59      0.97      0.74       396
+         sci.electronics       0.84      0.60      0.70       393
+                 sci.med       0.92      0.74      0.82       396
+               sci.space       0.84      0.89      0.87       394
+  soc.religion.christian       0.44      0.98      0.61       398
+      talk.politics.guns       0.64      0.94      0.76       364
+   talk.politics.mideast       0.93      0.91      0.92       376
+      talk.politics.misc       0.96      0.42      0.58       310
+      talk.religion.misc       0.97      0.14      0.24       251
+...
+            weighted avg       0.82      0.77      0.77      7532
+
+
+模型準確度: 0.7739
+</code></pre><h3 id=圖表>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 排序</span>
+</span></span><span style=display:flex><span>unique_labels_in_test <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得標籤名稱</span>
+</span></span><span style=display:flex><span>actual_target_names_in_test <span style=color:#f92672>=</span> [newsgroups_train<span style=color:#f92672>.</span>target_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> unique_labels_in_test]
+</span></span><span style=display:flex><span><span style=color:#75715e># 計算混淆矩陣</span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(newsgroups_test<span style=color:#f92672>.</span>target, y_pred, labels<span style=color:#f92672>=</span>unique_labels_in_test)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>)) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成圖表</span>
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>,
+</span></span><span style=display:flex><span>            xticklabels<span style=color:#f92672>=</span>actual_target_names_in_test,
+</span></span><span style=display:flex><span>            yticklabels<span style=color:#f92672>=</span>actual_target_names_in_test)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout() 
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image.png alt="alt text"></p><h2 id=多類分類>多類分類</h2><p>模型準確度: 0.8186
+執行時間: 4m21.5s</p><h3 id=執行-1>執行</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.svm <span style=color:#f92672>import</span> SVC
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> fetch_20newsgroups
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>filename <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;SVC&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>newsgroups_train <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;train&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>newsgroups_test <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;test&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;訓練集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;測試集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_test<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;總類別數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>target_names)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model_pipeline <span style=color:#f92672>=</span> make_pipeline(TfidfVectorizer(), SVC())
+</span></span><span style=display:flex><span>model_pipeline<span style=color:#f92672>.</span>fit(newsgroups_train<span style=color:#f92672>.</span>data, newsgroups_train<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> model_pipeline<span style=color:#f92672>.</span>predict(newsgroups_test<span style=color:#f92672>.</span>data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(classification_report(newsgroups_test<span style=color:#f92672>.</span>target, y_pred,
+</span></span><span style=display:flex><span>                            labels<span style=color:#f92672>=</span>np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target),
+</span></span><span style=display:flex><span>                            target_names<span style=color:#f92672>=</span>newsgroups_train<span style=color:#f92672>.</span>target_names))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>accuracy <span style=color:#f92672>=</span> accuracy_score(newsgroups_test<span style=color:#f92672>.</span>target, y_pred)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>模型準確度: </span><span style=color:#e6db74>{</span>accuracy<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p>輸出</p><pre tabindex=0><code>訓練集樣本數: 11314
+測試集樣本數: 7532
+總類別數: 20
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.83      0.71      0.76       319
+           comp.graphics       0.62      0.82      0.71       389
+ comp.os.ms-windows.misc       0.80      0.70      0.75       394
+comp.sys.ibm.pc.hardware       0.73      0.78      0.76       392
+   comp.sys.mac.hardware       0.82      0.83      0.82       385
+          comp.windows.x       0.83      0.73      0.77       395
+            misc.forsale       0.73      0.91      0.81       390
+               rec.autos       0.90      0.87      0.89       396
+         rec.motorcycles       0.96      0.93      0.95       398
+      rec.sport.baseball       0.88      0.91      0.90       397
+        rec.sport.hockey       0.97      0.91      0.94       399
+               sci.crypt       0.96      0.85      0.90       396
+         sci.electronics       0.65      0.85      0.74       393
+                 sci.med       0.88      0.78      0.82       396
+               sci.space       0.93      0.88      0.90       394
+  soc.religion.christian       0.79      0.92      0.85       398
+      talk.politics.guns       0.75      0.88      0.81       364
+   talk.politics.mideast       0.97      0.81      0.88       376
+      talk.politics.misc       0.75      0.59      0.66       310
+      talk.religion.misc       0.79      0.55      0.65       251
+...
+            weighted avg       0.83      0.82      0.82      7532
+
+
+模型準確度: 0.8186
+</code></pre><h3 id=圖表-1>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 排序</span>
+</span></span><span style=display:flex><span>unique_labels_in_test <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得標籤名稱</span>
+</span></span><span style=display:flex><span>actual_target_names_in_test <span style=color:#f92672>=</span> [newsgroups_train<span style=color:#f92672>.</span>target_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> unique_labels_in_test]
+</span></span><span style=display:flex><span><span style=color:#75715e># 計算混淆矩陣</span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(newsgroups_test<span style=color:#f92672>.</span>target, y_pred, labels<span style=color:#f92672>=</span>unique_labels_in_test)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>)) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成圖表</span>
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>,
+</span></span><span style=display:flex><span>            xticklabels<span style=color:#f92672>=</span>actual_target_names_in_test,
+</span></span><span style=display:flex><span>            yticklabels<span style=color:#f92672>=</span>actual_target_names_in_test)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout() 
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-1.png alt="alt text"></p><h2 id=決策樹分類器>決策樹分類器</h2><p>模型準確度: 0.5548
+執行時間: 24.8s</p><h3 id=執行-2>執行</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.tree <span style=color:#f92672>import</span> DecisionTreeClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> fetch_20newsgroups
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>filename <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;DecisionTreeClassifier&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>newsgroups_train <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;train&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>newsgroups_test <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;test&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;訓練集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;測試集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_test<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;總類別數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>target_names)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model_pipeline <span style=color:#f92672>=</span> make_pipeline(TfidfVectorizer(), DecisionTreeClassifier())
+</span></span><span style=display:flex><span>model_pipeline<span style=color:#f92672>.</span>fit(newsgroups_train<span style=color:#f92672>.</span>data, newsgroups_train<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> model_pipeline<span style=color:#f92672>.</span>predict(newsgroups_test<span style=color:#f92672>.</span>data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(classification_report(newsgroups_test<span style=color:#f92672>.</span>target, y_pred,
+</span></span><span style=display:flex><span>                            labels<span style=color:#f92672>=</span>np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target),
+</span></span><span style=display:flex><span>                            target_names<span style=color:#f92672>=</span>newsgroups_train<span style=color:#f92672>.</span>target_names))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>accuracy <span style=color:#f92672>=</span> accuracy_score(newsgroups_test<span style=color:#f92672>.</span>target, y_pred)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>模型準確度: </span><span style=color:#e6db74>{</span>accuracy<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p>輸出</p><pre tabindex=0><code>訓練集樣本數: 11314
+測試集樣本數: 7532
+總類別數: 20
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.49      0.49      0.49       319
+           comp.graphics       0.42      0.42      0.42       389
+ comp.os.ms-windows.misc       0.53      0.57      0.55       394
+comp.sys.ibm.pc.hardware       0.44      0.40      0.42       392
+   comp.sys.mac.hardware       0.54      0.59      0.56       385
+          comp.windows.x       0.48      0.47      0.48       395
+            misc.forsale       0.67      0.72      0.69       390
+               rec.autos       0.57      0.59      0.58       396
+         rec.motorcycles       0.72      0.75      0.74       398
+      rec.sport.baseball       0.54      0.54      0.54       397
+        rec.sport.hockey       0.66      0.66      0.66       399
+               sci.crypt       0.74      0.70      0.72       396
+         sci.electronics       0.35      0.35      0.35       393
+                 sci.med       0.46      0.43      0.45       396
+               sci.space       0.66      0.62      0.64       394
+  soc.religion.christian       0.71      0.72      0.71       398
+      talk.politics.guns       0.51      0.62      0.56       364
+   talk.politics.mideast       0.79      0.61      0.69       376
+      talk.politics.misc       0.41      0.38      0.40       310
+      talk.religion.misc       0.30      0.33      0.31       251
+...
+            weighted avg       0.56      0.55      0.55      7532
+
+
+模型準確度: 0.5548
+</code></pre><h3 id=圖表-2>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 排序</span>
+</span></span><span style=display:flex><span>unique_labels_in_test <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得標籤名稱</span>
+</span></span><span style=display:flex><span>actual_target_names_in_test <span style=color:#f92672>=</span> [newsgroups_train<span style=color:#f92672>.</span>target_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> unique_labels_in_test]
+</span></span><span style=display:flex><span><span style=color:#75715e># 計算混淆矩陣</span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(newsgroups_test<span style=color:#f92672>.</span>target, y_pred, labels<span style=color:#f92672>=</span>unique_labels_in_test)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>)) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成圖表</span>
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>,
+</span></span><span style=display:flex><span>            xticklabels<span style=color:#f92672>=</span>actual_target_names_in_test,
+</span></span><span style=display:flex><span>            yticklabels<span style=color:#f92672>=</span>actual_target_names_in_test)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout() 
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-2.png alt="alt text"></p><h2 id=隨機森林分類器>隨機森林分類器</h2><p>模型準確度: 0.7638
+執行時間: 40.1s</p><h3 id=執行-3>執行</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.ensemble <span style=color:#f92672>import</span> RandomForestClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> fetch_20newsgroups
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>filename <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;RandomForestClassifier&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>newsgroups_train <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;train&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>newsgroups_test <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;test&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;訓練集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;測試集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_test<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;總類別數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>target_names)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model_pipeline <span style=color:#f92672>=</span> make_pipeline(TfidfVectorizer(), RandomForestClassifier())
+</span></span><span style=display:flex><span>model_pipeline<span style=color:#f92672>.</span>fit(newsgroups_train<span style=color:#f92672>.</span>data, newsgroups_train<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> model_pipeline<span style=color:#f92672>.</span>predict(newsgroups_test<span style=color:#f92672>.</span>data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(classification_report(newsgroups_test<span style=color:#f92672>.</span>target, y_pred,
+</span></span><span style=display:flex><span>                            labels<span style=color:#f92672>=</span>np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target),
+</span></span><span style=display:flex><span>                            target_names<span style=color:#f92672>=</span>newsgroups_train<span style=color:#f92672>.</span>target_names))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>accuracy <span style=color:#f92672>=</span> accuracy_score(newsgroups_test<span style=color:#f92672>.</span>target, y_pred)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>模型準確度: </span><span style=color:#e6db74>{</span>accuracy<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p>輸出</p><pre tabindex=0><code>訓練集樣本數: 11314
+測試集樣本數: 7532
+總類別數: 20
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.73      0.66      0.69       319
+           comp.graphics       0.60      0.70      0.65       389
+ comp.os.ms-windows.misc       0.67      0.76      0.71       394
+comp.sys.ibm.pc.hardware       0.67      0.66      0.66       392
+   comp.sys.mac.hardware       0.71      0.78      0.75       385
+          comp.windows.x       0.78      0.73      0.76       395
+            misc.forsale       0.74      0.93      0.82       390
+               rec.autos       0.83      0.80      0.81       396
+         rec.motorcycles       0.91      0.91      0.91       398
+      rec.sport.baseball       0.79      0.88      0.83       397
+        rec.sport.hockey       0.85      0.91      0.88       399
+               sci.crypt       0.90      0.92      0.91       396
+         sci.electronics       0.69      0.51      0.59       393
+                 sci.med       0.80      0.64      0.71       396
+               sci.space       0.82      0.89      0.85       394
+  soc.religion.christian       0.70      0.93      0.80       398
+      talk.politics.guns       0.66      0.85      0.74       364
+   talk.politics.mideast       0.96      0.81      0.87       376
+      talk.politics.misc       0.82      0.47      0.60       310
+      talk.religion.misc       0.76      0.28      0.41       251
+...
+            weighted avg       0.77      0.76      0.76      7532
+
+
+模型準確度: 0.7638
+</code></pre><h3 id=圖表-3>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 排序</span>
+</span></span><span style=display:flex><span>unique_labels_in_test <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得標籤名稱</span>
+</span></span><span style=display:flex><span>actual_target_names_in_test <span style=color:#f92672>=</span> [newsgroups_train<span style=color:#f92672>.</span>target_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> unique_labels_in_test]
+</span></span><span style=display:flex><span><span style=color:#75715e># 計算混淆矩陣</span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(newsgroups_test<span style=color:#f92672>.</span>target, y_pred, labels<span style=color:#f92672>=</span>unique_labels_in_test)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>)) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成圖表</span>
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>,
+</span></span><span style=display:flex><span>            xticklabels<span style=color:#f92672>=</span>actual_target_names_in_test,
+</span></span><span style=display:flex><span>            yticklabels<span style=color:#f92672>=</span>actual_target_names_in_test)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout() 
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-3.png alt="alt text"></p><h2 id=k鄰居分類器>K鄰居分類器</h2><p>模型準確度: 0.6592
+執行時間: 18.2s</p><h3 id=執行-4>執行</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.neighbors <span style=color:#f92672>import</span> KNeighborsClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> fetch_20newsgroups
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>filename <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;KNeighborsClassifier&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>newsgroups_train <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;train&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>newsgroups_test <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;test&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;訓練集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;測試集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_test<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;總類別數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>target_names)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model_pipeline <span style=color:#f92672>=</span> make_pipeline(TfidfVectorizer(), KNeighborsClassifier())
+</span></span><span style=display:flex><span>model_pipeline<span style=color:#f92672>.</span>fit(newsgroups_train<span style=color:#f92672>.</span>data, newsgroups_train<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> model_pipeline<span style=color:#f92672>.</span>predict(newsgroups_test<span style=color:#f92672>.</span>data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(classification_report(newsgroups_test<span style=color:#f92672>.</span>target, y_pred,
+</span></span><span style=display:flex><span>                            labels<span style=color:#f92672>=</span>np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target),
+</span></span><span style=display:flex><span>                            target_names<span style=color:#f92672>=</span>newsgroups_train<span style=color:#f92672>.</span>target_names))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>accuracy <span style=color:#f92672>=</span> accuracy_score(newsgroups_test<span style=color:#f92672>.</span>target, y_pred)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>模型準確度: </span><span style=color:#e6db74>{</span>accuracy<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p>輸出</p><pre tabindex=0><code>訓練集樣本數: 11314
+測試集樣本數: 7532
+總類別數: 20
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.43      0.76      0.55       319
+           comp.graphics       0.50      0.61      0.55       389
+ comp.os.ms-windows.misc       0.56      0.57      0.57       394
+comp.sys.ibm.pc.hardware       0.53      0.58      0.56       392
+   comp.sys.mac.hardware       0.59      0.56      0.57       385
+          comp.windows.x       0.69      0.60      0.64       395
+            misc.forsale       0.58      0.45      0.51       390
+               rec.autos       0.75      0.69      0.72       396
+         rec.motorcycles       0.84      0.81      0.82       398
+      rec.sport.baseball       0.77      0.72      0.74       397
+        rec.sport.hockey       0.85      0.84      0.84       399
+               sci.crypt       0.76      0.84      0.80       396
+         sci.electronics       0.70      0.50      0.58       393
+                 sci.med       0.82      0.49      0.62       396
+               sci.space       0.79      0.76      0.78       394
+  soc.religion.christian       0.75      0.76      0.76       398
+      talk.politics.guns       0.70      0.73      0.72       364
+   talk.politics.mideast       0.62      0.76      0.69       376
+      talk.politics.misc       0.55      0.61      0.58       310
+      talk.religion.misc       0.56      0.49      0.52       251
+...
+            weighted avg       0.67      0.66      0.66      7532
+
+
+模型準確度: 0.6592
+</code></pre><h3 id=圖表-4>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 排序</span>
+</span></span><span style=display:flex><span>unique_labels_in_test <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得標籤名稱</span>
+</span></span><span style=display:flex><span>actual_target_names_in_test <span style=color:#f92672>=</span> [newsgroups_train<span style=color:#f92672>.</span>target_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> unique_labels_in_test]
+</span></span><span style=display:flex><span><span style=color:#75715e># 計算混淆矩陣</span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(newsgroups_test<span style=color:#f92672>.</span>target, y_pred, labels<span style=color:#f92672>=</span>unique_labels_in_test)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>)) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成圖表</span>
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>,
+</span></span><span style=display:flex><span>            xticklabels<span style=color:#f92672>=</span>actual_target_names_in_test,
+</span></span><span style=display:flex><span>            yticklabels<span style=color:#f92672>=</span>actual_target_names_in_test)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout() 
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-4.png alt="alt text"></p><h2 id=線性svc>線性SVC</h2><p>模型準確度: 0.8532
+執行時間: 16.5s</p><h3 id=執行-5>執行</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.svm <span style=color:#f92672>import</span> LinearSVC
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> fetch_20newsgroups
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>filename <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;LinearSVC&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>newsgroups_train <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;train&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>newsgroups_test <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;test&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;訓練集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;測試集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_test<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;總類別數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>target_names)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model_pipeline <span style=color:#f92672>=</span> make_pipeline(TfidfVectorizer(), LinearSVC())
+</span></span><span style=display:flex><span>model_pipeline<span style=color:#f92672>.</span>fit(newsgroups_train<span style=color:#f92672>.</span>data, newsgroups_train<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> model_pipeline<span style=color:#f92672>.</span>predict(newsgroups_test<span style=color:#f92672>.</span>data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(classification_report(newsgroups_test<span style=color:#f92672>.</span>target, y_pred,
+</span></span><span style=display:flex><span>                            labels<span style=color:#f92672>=</span>np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target),
+</span></span><span style=display:flex><span>                            target_names<span style=color:#f92672>=</span>newsgroups_train<span style=color:#f92672>.</span>target_names))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>accuracy <span style=color:#f92672>=</span> accuracy_score(newsgroups_test<span style=color:#f92672>.</span>target, y_pred)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>模型準確度: </span><span style=color:#e6db74>{</span>accuracy<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p>輸出</p><pre tabindex=0><code>訓練集樣本數: 11314
+測試集樣本數: 7532
+總類別數: 20
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.82      0.80      0.81       319
+           comp.graphics       0.76      0.80      0.78       389
+ comp.os.ms-windows.misc       0.77      0.73      0.75       394
+comp.sys.ibm.pc.hardware       0.71      0.76      0.74       392
+   comp.sys.mac.hardware       0.84      0.86      0.85       385
+          comp.windows.x       0.87      0.76      0.81       395
+            misc.forsale       0.83      0.91      0.87       390
+               rec.autos       0.92      0.91      0.91       396
+         rec.motorcycles       0.95      0.95      0.95       398
+      rec.sport.baseball       0.92      0.95      0.93       397
+        rec.sport.hockey       0.96      0.98      0.97       399
+               sci.crypt       0.93      0.94      0.93       396
+         sci.electronics       0.81      0.79      0.80       393
+                 sci.med       0.90      0.87      0.88       396
+               sci.space       0.90      0.93      0.92       394
+  soc.religion.christian       0.84      0.93      0.88       398
+      talk.politics.guns       0.75      0.92      0.82       364
+   talk.politics.mideast       0.97      0.89      0.93       376
+      talk.politics.misc       0.82      0.62      0.71       310
+      talk.religion.misc       0.75      0.61      0.68       251
+...
+            weighted avg       0.85      0.85      0.85      7532
+
+
+模型準確度: 0.8532
+</code></pre><h3 id=圖表-5>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 排序</span>
+</span></span><span style=display:flex><span>unique_labels_in_test <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得標籤名稱</span>
+</span></span><span style=display:flex><span>actual_target_names_in_test <span style=color:#f92672>=</span> [newsgroups_train<span style=color:#f92672>.</span>target_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> unique_labels_in_test]
+</span></span><span style=display:flex><span><span style=color:#75715e># 計算混淆矩陣</span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(newsgroups_test<span style=color:#f92672>.</span>target, y_pred, labels<span style=color:#f92672>=</span>unique_labels_in_test)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>)) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成圖表</span>
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>,
+</span></span><span style=display:flex><span>            xticklabels<span style=color:#f92672>=</span>actual_target_names_in_test,
+</span></span><span style=display:flex><span>            yticklabels<span style=color:#f92672>=</span>actual_target_names_in_test)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout() 
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-5.png alt="alt text"></p><h2 id=隨機森林>隨機森林</h2><p>模型準確度: 0.7584
+執行時間: 19.4s</p><h3 id=執行-6>執行</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.ensemble <span style=color:#f92672>import</span> RandomForestClassifier
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> fetch_20newsgroups
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>filename <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;RandomForestClassifier&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>newsgroups_train <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;train&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>newsgroups_test <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;test&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;訓練集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;測試集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_test<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;總類別數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>target_names)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model_pipeline <span style=color:#f92672>=</span> make_pipeline(TfidfVectorizer(), RandomForestClassifier())
+</span></span><span style=display:flex><span>model_pipeline<span style=color:#f92672>.</span>fit(newsgroups_train<span style=color:#f92672>.</span>data, newsgroups_train<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> model_pipeline<span style=color:#f92672>.</span>predict(newsgroups_test<span style=color:#f92672>.</span>data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(classification_report(newsgroups_test<span style=color:#f92672>.</span>target, y_pred,
+</span></span><span style=display:flex><span>                            labels<span style=color:#f92672>=</span>np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target),
+</span></span><span style=display:flex><span>                            target_names<span style=color:#f92672>=</span>newsgroups_train<span style=color:#f92672>.</span>target_names))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>accuracy <span style=color:#f92672>=</span> accuracy_score(newsgroups_test<span style=color:#f92672>.</span>target, y_pred)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>模型準確度: </span><span style=color:#e6db74>{</span>accuracy<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p>輸出</p><pre tabindex=0><code>訓練集樣本數: 11314
+測試集樣本數: 7532
+總類別數: 20
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.73      0.64      0.68       319
+           comp.graphics       0.58      0.71      0.64       389
+ comp.os.ms-windows.misc       0.65      0.80      0.72       394
+comp.sys.ibm.pc.hardware       0.64      0.61      0.62       392
+   comp.sys.mac.hardware       0.71      0.77      0.74       385
+          comp.windows.x       0.76      0.71      0.73       395
+            misc.forsale       0.74      0.93      0.82       390
+               rec.autos       0.82      0.79      0.80       396
+         rec.motorcycles       0.88      0.91      0.89       398
+      rec.sport.baseball       0.79      0.88      0.83       397
+        rec.sport.hockey       0.88      0.92      0.90       399
+               sci.crypt       0.88      0.90      0.89       396
+         sci.electronics       0.69      0.47      0.56       393
+                 sci.med       0.89      0.65      0.75       396
+               sci.space       0.83      0.87      0.85       394
+  soc.religion.christian       0.68      0.92      0.78       398
+      talk.politics.guns       0.66      0.87      0.75       364
+   talk.politics.mideast       0.96      0.81      0.87       376
+      talk.politics.misc       0.83      0.46      0.59       310
+      talk.religion.misc       0.80      0.29      0.43       251
+...
+            weighted avg       0.77      0.76      0.75      7532
+
+
+模型準確度: 0.7584
+</code></pre><h3 id=圖表-6>圖表</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 排序</span>
+</span></span><span style=display:flex><span>unique_labels_in_test <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得標籤名稱</span>
+</span></span><span style=display:flex><span>actual_target_names_in_test <span style=color:#f92672>=</span> [newsgroups_train<span style=color:#f92672>.</span>target_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> unique_labels_in_test]
+</span></span><span style=display:flex><span><span style=color:#75715e># 計算混淆矩陣</span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(newsgroups_test<span style=color:#f92672>.</span>target, y_pred, labels<span style=color:#f92672>=</span>unique_labels_in_test)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>)) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成圖表</span>
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>,
+</span></span><span style=display:flex><span>            xticklabels<span style=color:#f92672>=</span>actual_target_names_in_test,
+</span></span><span style=display:flex><span>            yticklabels<span style=color:#f92672>=</span>actual_target_names_in_test)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout() 
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-6.png alt="alt text"></p><h2 id=邏輯回歸>邏輯回歸</h2><p>模型準確度: 0.8278
+執行時間: 33.5s</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.linear_model <span style=color:#f92672>import</span> LogisticRegression
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, accuracy_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> fetch_20newsgroups
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>filename <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;LogisticRegression&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>newsgroups_train <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;train&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>newsgroups_test <span style=color:#f92672>=</span> fetch_20newsgroups(subset<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;test&#39;</span>, data_home<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;./data/</span><span style=color:#e6db74>{</span>filename<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;訓練集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;測試集樣本數: </span><span style=color:#e6db74>{</span>len(newsgroups_test<span style=color:#f92672>.</span>data)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;總類別數: </span><span style=color:#e6db74>{</span>len(newsgroups_train<span style=color:#f92672>.</span>target_names)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model_pipeline <span style=color:#f92672>=</span> make_pipeline(TfidfVectorizer(), LogisticRegression())
+</span></span><span style=display:flex><span>model_pipeline<span style=color:#f92672>.</span>fit(newsgroups_train<span style=color:#f92672>.</span>data, newsgroups_train<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> model_pipeline<span style=color:#f92672>.</span>predict(newsgroups_test<span style=color:#f92672>.</span>data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(classification_report(newsgroups_test<span style=color:#f92672>.</span>target, y_pred,
+</span></span><span style=display:flex><span>                            labels<span style=color:#f92672>=</span>np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target),
+</span></span><span style=display:flex><span>                            target_names<span style=color:#f92672>=</span>newsgroups_train<span style=color:#f92672>.</span>target_names))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>accuracy <span style=color:#f92672>=</span> accuracy_score(newsgroups_test<span style=color:#f92672>.</span>target, y_pred)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>模型準確度: </span><span style=color:#e6db74>{</span>accuracy<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p>輸出</p><pre tabindex=0><code>訓練集樣本數: 11314
+測試集樣本數: 7532
+總類別數: 20
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.80      0.74      0.77       319
+           comp.graphics       0.69      0.79      0.74       389
+ comp.os.ms-windows.misc       0.75      0.74      0.74       394
+comp.sys.ibm.pc.hardware       0.72      0.72      0.72       392
+   comp.sys.mac.hardware       0.81      0.83      0.82       385
+          comp.windows.x       0.83      0.74      0.78       395
+            misc.forsale       0.76      0.90      0.82       390
+               rec.autos       0.91      0.89      0.90       396
+         rec.motorcycles       0.95      0.95      0.95       398
+      rec.sport.baseball       0.88      0.92      0.90       397
+        rec.sport.hockey       0.95      0.95      0.95       399
+               sci.crypt       0.94      0.88      0.91       396
+         sci.electronics       0.76      0.80      0.78       393
+                 sci.med       0.89      0.83      0.85       396
+               sci.space       0.91      0.92      0.91       394
+  soc.religion.christian       0.81      0.94      0.87       398
+      talk.politics.guns       0.72      0.88      0.79       364
+   talk.politics.mideast       0.97      0.88      0.92       376
+      talk.politics.misc       0.76      0.58      0.66       310
+      talk.religion.misc       0.81      0.49      0.61       251
+...
+            weighted avg       0.83      0.83      0.83      7532
+
+
+模型準確度: 0.8278
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 排序</span>
+</span></span><span style=display:flex><span>unique_labels_in_test <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>unique(newsgroups_test<span style=color:#f92672>.</span>target)
+</span></span><span style=display:flex><span><span style=color:#75715e># 取得標籤名稱</span>
+</span></span><span style=display:flex><span>actual_target_names_in_test <span style=color:#f92672>=</span> [newsgroups_train<span style=color:#f92672>.</span>target_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> unique_labels_in_test]
+</span></span><span style=display:flex><span><span style=color:#75715e># 計算混淆矩陣</span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(newsgroups_test<span style=color:#f92672>.</span>target, y_pred, labels<span style=color:#f92672>=</span>unique_labels_in_test)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>)) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成圖表</span>
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>,
+</span></span><span style=display:flex><span>            xticklabels<span style=color:#f92672>=</span>actual_target_names_in_test,
+</span></span><span style=display:flex><span>            yticklabels<span style=color:#f92672>=</span>actual_target_names_in_test)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout() 
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>輸出</p><p><img src=image-7.png alt="alt text"></p></div><footer><div><ul class=main_page_terms_ul_class><li class=main_page_terms_li_class><div>標籤:</div></li><ul class=main_page_terms_ul_class2><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>Python語言</div><a class=main_page_terms_a_class href=/tomku/tags/python%E8%AA%9E%E8%A8%80/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>練習實作</div><a class=main_page_terms_a_class href=/tomku/tags/%E7%B7%B4%E7%BF%92%E5%AF%A6%E4%BD%9C/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>AI</div><a class=main_page_terms_a_class href=/tomku/tags/ai/></a></li></ul></ul></div><nav class=main_page_section_nav_class></nav></footer></article></section></div><aside class="main right_aside_class"><div class=right_div_class><details class=right_details_class open><summary class=right_details_class>目錄</summary><nav id=TableOfContents><ul><li><a href=#scikit-learn比較模型>scikit-learn比較模型</a><ul><li><a href=#比較>比較</a><ul><li><a href=#表格>表格</a></li><li><a href=#結果>結果</a></li></ul></li><li><a href=#多項式樸素貝葉斯>多項式樸素貝葉斯</a><ul><li><a href=#執行>執行</a></li><li><a href=#圖表>圖表</a></li></ul></li><li><a href=#多類分類>多類分類</a><ul><li><a href=#執行-1>執行</a></li><li><a href=#圖表-1>圖表</a></li></ul></li><li><a href=#決策樹分類器>決策樹分類器</a><ul><li><a href=#執行-2>執行</a></li><li><a href=#圖表-2>圖表</a></li></ul></li><li><a href=#隨機森林分類器>隨機森林分類器</a><ul><li><a href=#執行-3>執行</a></li><li><a href=#圖表-3>圖表</a></li></ul></li><li><a href=#k鄰居分類器>K鄰居分類器</a><ul><li><a href=#執行-4>執行</a></li><li><a href=#圖表-4>圖表</a></li></ul></li><li><a href=#線性svc>線性SVC</a><ul><li><a href=#執行-5>執行</a></li><li><a href=#圖表-5>圖表</a></li></ul></li><li><a href=#隨機森林>隨機森林</a><ul><li><a href=#執行-6>執行</a></li><li><a href=#圖表-6>圖表</a></li></ul></li><li><a href=#邏輯回歸>邏輯回歸</a></li></ul></li></ul></nav></details></div><div class=right_div_class><details class=right_related_details_class open><summary class=right_related_details_class>相關文章</summary><nav class=right_related_page_nav_class><ol class=right_related_page_ol_class></ol><hr></nav></details></div></aside></main><footer class=baseof_footer_class><center><p>Copyright @2024-2025 tomku的網誌 Powered by <a href=https://gohugo.io/>Hugo</a></p><p xmlns:cc=http://creativecommons.org/ns# xmlns:dct=http://purl.org/dc/terms/>Except where otherwise noted, <span property="dct:title">tomku的網誌</span> by <span property="cc:attributionName">YU-LUN KU</span> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target=_blank rel="license noopener noreferrer" style=display:inline-block>Attribution-ShareAlike 4.0 International<img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p><p>若有需聯絡請寄信到tom8760925@gmail.com</p><p>若分享內容有侵害您的著作權，請來信告知，我將儘速移除相關內容</p></center></footer></body></html>
