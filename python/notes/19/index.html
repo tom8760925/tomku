@@ -1,0 +1,631 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>python語言的筆記-pytorch-文字AI模型 | tomku的網誌
+</title><link rel=stylesheet href=/tomku/css/cssall.min.6db1d46d747ddea4cd158fef8a0e6f577651a77ebbe8bf96fc205497064d9dcf.css><script src=/tomku/js/main.js></script><script src=/tomku/js/header.js></script></head><body><header class=baseof_header_class><nav class=header_nav_class><div id=header_div_left class=header_div_class><a href=/tomku/><h1 class=header_h1_class>tomku的網誌</h1></a></div><div id=header_div_right class=header_div_class><ul class=header_menu_ul_class><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/>首頁</a></li><li class=header_menu_li_class><a class=header_menu_a_class2 onclick='displaymenu("header_menu_li_class_1")'>程式</a><ul id=header_menu_li_class_1 class=header_menu_ul_class2><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/c/>C</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/c++/>C++</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/golang/>golang</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/java/>java</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/python/>python</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/csharp/>csharp</a></li></ul></li><li class=header_menu_li_class><a class=header_menu_a_class2 onclick='displaymenu("header_menu_li_class_2")'>其他</a><ul id=header_menu_li_class_2 class=header_menu_ul_class2><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/esp/>esp</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/git/>git</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/hugo/>hugo</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/mysql/>mysql</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/minecraft/>minecraft</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/qt/>qt</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/linux/>linux</a></li><li class=header_menu_li_class2><a class=header_menu_a_class href=/tomku/other/>other</a></li></ul></li><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/tags/>標籤</a></li><li class=header_menu_li_class><a class=header_menu_a_class href=/tomku/about/>關於</a></li></ul></div></nav></header><main class=baseof_main_class><aside class="main left_aside_class"><div class=left_div_class3><button class=left_button_class onclick=displayleft()>☰</button></div><div id=left_div_class4 class=left_div_class4><div class=left_div_class><div class=left_div_class2>個人連結</div><div class=left_social_div_class><ul class=left_social_ul_class><li class=left_social_li_class><a href=https://github.com/tom8760925 class=left_social_a_class>github</a></li><li class=left_social_li_class><a href=https://www.notion.so/tomku-1dafd63b811e80debc8fe145cc6d494a class=left_social_a_class>副網誌</a></li></ul></div></div><div class=left_div_class><div class=left_div_class2>最新文章</div><nav><ul class=left_recent_ul_class><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/19/>python語言的筆記-pytorch-文字AI模型</a></header><footer class=left_recent_footer_class><time datetime=2025-10-18T15:07:01+08:00>2025-10-18</time></footer><a class=left_recent_a_class href=/tomku/python/notes/19/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/notes/18/>python語言的筆記-pytorch-圖像AI模型</a></header><footer class=left_recent_footer_class><time datetime=2025-09-30T17:24:43+08:00>2025-09-30</time></footer><a class=left_recent_a_class href=/tomku/python/notes/18/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/ai/no/08/>AI的練習-深度學習</a></header><footer class=left_recent_footer_class><time datetime=2025-09-08T15:56:10+08:00>2025-09-08</time></footer><a class=left_recent_a_class href=/tomku/ai/no/08/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/ai/no/07/>AI的練習-其他</a></header><footer class=left_recent_footer_class><time datetime=2025-09-08T14:01:40+08:00>2025-09-08</time></footer><a class=left_recent_a_class href=/tomku/ai/no/07/></a></article></li><li class=left_recent_li_class><article><header class=left_recent_header_class><a href=/tomku/python/practice/focus14/>python語言的練習-練習實作重點14-變數範圍</a></header><footer class=left_recent_footer_class><time datetime=2025-09-08T13:33:10+08:00>2025-09-08</time></footer><a class=left_recent_a_class href=/tomku/python/practice/focus14/></a></article></li></ul></nav></div><div class=left_div_class><div class=left_div_class2>標籤</div><div class=left_tags_div_class><a href=/tomku/categories/ai/ class=left_tags_a_class>Ai<sup>10</sup>
+</a><a href=/tomku/categories/c++%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>C++語言<sup>169</sup>
+</a><a href=/tomku/categories/cmake/ class=left_tags_a_class>Cmake<sup>2</sup>
+</a><a href=/tomku/categories/csharp%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Csharp語言<sup>1</sup>
+</a><a href=/tomku/categories/c%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>C語言<sup>22</sup>
+</a><a href=/tomku/categories/esp/ class=left_tags_a_class>Esp<sup>9</sup>
+</a><a href=/tomku/categories/git/ class=left_tags_a_class>Git<sup>1</sup>
+</a><a href=/tomku/categories/golang%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Golang語言<sup>20</sup>
+</a><a href=/tomku/categories/hugo/ class=left_tags_a_class>Hugo<sup>2</sup>
+</a><a href=/tomku/categories/linux/ class=left_tags_a_class>Linux<sup>30</sup>
+</a><a href=/tomku/categories/minecraft/ class=left_tags_a_class>Minecraft<sup>6</sup>
+</a><a href=/tomku/categories/mysql/ class=left_tags_a_class>Mysql<sup>3</sup>
+</a><a href=/tomku/categories/proxomx/ class=left_tags_a_class>Proxomx<sup>3</sup>
+</a><a href=/tomku/categories/python%E8%AA%9E%E8%A8%80/ class=left_tags_a_class>Python語言<sup>34</sup>
+</a><a href=/tomku/categories/qt/ class=left_tags_a_class>Qt<sup>11</sup>
+</a><a href=/tomku/categories/xcode/ class=left_tags_a_class>Xcode<sup>3</sup>
+</a><a href=/tomku/categories/%E5%85%B6%E4%BB%96/ class=left_tags_a_class>其他<sup>1</sup>
+</a><a href=/tomku/categories/%E9%97%9C%E6%96%BC/ class=left_tags_a_class>關於<sup>1</sup></a></div></div></div></aside><div class="main main_div_class"><section class=main_page_section_class><article><header><div class=main_page_breadcrumb_div_class><a href=/tomku/>簡介
+</a>/<a href=/tomku/python/>Pythons
+</a>/<a href=/tomku/python/notes/>筆記
+</a>/</div><h1 class=main_page_h1_class>python語言的筆記-pytorch-文字AI模型</h1></header><time class=main_page_time_class datetime=2025-10-18T15:07:01+08:00>2025-10-18</time><div class=main_page_div_class2><h1 id=pytorch-文字ai模型>pytorch-文字AI模型</h1><p>這篇是python的筆記第19篇</p><h2 id=對稱式>對稱式</h2><h3 id=simplernn>SimpleRNN</h3><p>這是rnn的稍微進化版，修改rnn的問題</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch.nn <span style=color:#66d9ef>as</span> nn
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch.optim <span style=color:#66d9ef>as</span> optim
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> torch.utils.data <span style=color:#f92672>import</span> TensorDataset, DataLoader, random_split
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.datasets <span style=color:#f92672>import</span> imdb
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.preprocessing <span style=color:#f92672>import</span> sequence
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tqdm <span style=color:#f92672>import</span> tqdm
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用顯卡或cpu執行</span>
+</span></span><span style=display:flex><span>device <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>device(<span style=color:#e6db74>&#39;cuda&#39;</span> <span style=color:#66d9ef>if</span> torch<span style=color:#f92672>.</span>cuda<span style=color:#f92672>.</span>is_available() <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#39;cpu&#39;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;使用的設備: </span><span style=color:#e6db74>{</span>device<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集設定</span>
+</span></span><span style=display:flex><span>(X_train_np, y_train_np), (X_test_np, y_test_np) <span style=color:#f92672>=</span> imdb<span style=color:#f92672>.</span>load_data(num_words<span style=color:#f92672>=</span><span style=color:#ae81ff>10000</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 輸入序列長度 (500)</span>
+</span></span><span style=display:flex><span>X_train_padded_np <span style=color:#f92672>=</span> sequence<span style=color:#f92672>.</span>pad_sequences(X_train_np, maxlen<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>)
+</span></span><span style=display:flex><span>X_test_padded_np <span style=color:#f92672>=</span> sequence<span style=color:#f92672>.</span>pad_sequences(X_test_np, maxlen<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料轉型態，標籤必須為 torch.long 才能配合 nn.NLLLoss</span>
+</span></span><span style=display:flex><span>X_train_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(X_train_padded_np, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>long)
+</span></span><span style=display:flex><span>y_train_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(y_train_np, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>long)
+</span></span><span style=display:flex><span>X_test_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(X_test_padded_np, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>long)
+</span></span><span style=display:flex><span>y_test_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(y_test_np, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>long)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料合併</span>
+</span></span><span style=display:flex><span>full_train_dataset <span style=color:#f92672>=</span> TensorDataset(X_train_tensor, y_train_tensor)
+</span></span><span style=display:flex><span>test_dataset <span style=color:#f92672>=</span> TensorDataset(X_test_tensor, y_test_tensor)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 分割訓練集8:2分 (訓練集與驗證集)</span>
+</span></span><span style=display:flex><span>train_size <span style=color:#f92672>=</span> int((<span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.2</span>) <span style=color:#f92672>*</span> len(full_train_dataset))
+</span></span><span style=display:flex><span>val_size <span style=color:#f92672>=</span> len(full_train_dataset) <span style=color:#f92672>-</span> train_size
+</span></span><span style=display:flex><span>train_dataset, val_dataset <span style=color:#f92672>=</span> random_split(full_train_dataset, [train_size, val_size])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集分群批</span>
+</span></span><span style=display:flex><span>BATCH_SIZE <span style=color:#f92672>=</span> <span style=color:#ae81ff>64</span>
+</span></span><span style=display:flex><span>trainloader <span style=color:#f92672>=</span> DataLoader(train_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>valloader <span style=color:#f92672>=</span> DataLoader(val_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>testloader <span style=color:#f92672>=</span> DataLoader(test_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 模型定義</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RNN</span>(nn<span style=color:#f92672>.</span>Module):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> __init__(self):
+</span></span><span style=display:flex><span>        super()<span style=color:#f92672>.</span>__init__()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 詞嵌入層: 詞彙表大小 (10000)，詞向量維度 (32)</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>embedding <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Embedding(<span style=color:#ae81ff>10000</span>, <span style=color:#ae81ff>32</span>, padding_idx<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># SimpleRNN 層: 輸入 (32), 隱藏層大小 (32)</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>rnn <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>RNN(
+</span></span><span style=display:flex><span>            input_size<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>,
+</span></span><span style=display:flex><span>            hidden_size<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>,
+</span></span><span style=display:flex><span>            num_layers<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>            batch_first<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 線性輸出層: 隱藏層大小 (32) 到 2 個類別 (正面/負面)</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>linear <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>32</span>, <span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將輸出轉換為 Log-機率，與 nn.NLLLoss 配合使用</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>logsoftmax <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>LogSoftmax(dim<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>forward</span>(self, x):
+</span></span><span style=display:flex><span>        embedded <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>embedding(x)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># rnn_outputs 包含所有時間步的輸出，_ 是最後的隱藏狀態</span>
+</span></span><span style=display:flex><span>        rnn_outputs, _ <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>rnn(embedded)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 僅取序列中最後一個時間步的輸出，代表整個評論的總結向量</span>
+</span></span><span style=display:flex><span>        last_output <span style=color:#f92672>=</span> rnn_outputs[:, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, :] 
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        logits <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>linear(last_output)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>logsoftmax(logits)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將模型轉移到指定設備</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> RNN()<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定損失: NLLLoss 配合 LogSoftmax</span>
+</span></span><span style=display:flex><span>criterion <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>NLLLoss()
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定優化: Adam</span>
+</span></span><span style=display:flex><span>optimizer <span style=color:#f92672>=</span> optim<span style=color:#f92672>.</span>Adam(model<span style=color:#f92672>.</span>parameters(), lr<span style=color:#f92672>=</span><span style=color:#ae81ff>0.001</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>NUM_EPOCHS <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定訓練次數</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> epoch <span style=color:#f92672>in</span> range(NUM_EPOCHS):
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 設定進度條，將訓練集載入</span>
+</span></span><span style=display:flex><span>    train_loop <span style=color:#f92672>=</span> tqdm(
+</span></span><span style=display:flex><span>        trainloader,
+</span></span><span style=display:flex><span>        desc<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Epoch </span><span style=color:#e6db74>{</span>epoch <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>NUM_EPOCHS<span style=color:#e6db74>}</span><span style=color:#e6db74> (訓練)&#34;</span>,
+</span></span><span style=display:flex><span>        unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>,
+</span></span><span style=display:flex><span>        leave<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 使用進度調</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> train_loop:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 訓練集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 梯度歸零，清除前一次批次的累積梯度</span>
+</span></span><span style=display:flex><span>        optimizer<span style=color:#f92672>.</span>zero_grad()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 反向傳播</span>
+</span></span><span style=display:flex><span>        loss<span style=color:#f92672>.</span>backward()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 更新權重</span>
+</span></span><span style=display:flex><span>        optimizer<span style=color:#f92672>.</span>step()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 顯示損失</span>
+</span></span><span style=display:flex><span>        train_loop<span style=color:#f92672>.</span>set_postfix(loss<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;</span><span style=color:#e6db74>{</span>loss<span style=color:#f92672>.</span>item()<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值 (argmax 獲取最高 Log-機率的索引)</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>argmax(outputs, dim<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>) 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 訓練結果輸出</span>
+</span></span><span style=display:flex><span>    train_loss_avg <span style=color:#f92672>=</span> total_loss <span style=color:#f92672>/</span> total_count
+</span></span><span style=display:flex><span>    train_acc_avg <span style=color:#f92672>=</span> total_correct <span style=color:#f92672>/</span> total_count
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;Epoch </span><span style=color:#e6db74>{</span>epoch<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>NUM_EPOCHS<span style=color:#e6db74>}</span><span style=color:#e6db74> - loss: </span><span style=color:#e6db74>{</span>train_loss_avg<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>train_acc_avg<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 切換到評估模式</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>eval()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>correct <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>total <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 不計算梯度</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>with</span> torch<span style=color:#f92672>.</span>no_grad():
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> tqdm(valloader, desc<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;驗證 (Validation)&#34;</span>, unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>): 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 驗證集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device) 
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>argmax(outputs, dim<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>) 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;驗證結果 - loss: </span><span style=color:#e6db74>{</span>total_loss <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>total_correct <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> tqdm(testloader, desc<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;最終測試 (Testing)&#34;</span>, unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>): 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 測試集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device) 
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>argmax(outputs, dim<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>) 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;測試集結果 - loss: </span><span style=color:#e6db74>{</span>total_loss <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>total_correct <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 切換到訓練模式</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>train()
+</span></span></code></pre></div><h3 id=lstm>LSTM</h3><p>rnn的進化版</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch.nn <span style=color:#66d9ef>as</span> nn
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch.optim <span style=color:#66d9ef>as</span> optim
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> torch.utils.data <span style=color:#f92672>import</span> TensorDataset, DataLoader, random_split
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.datasets <span style=color:#f92672>import</span> imdb
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.preprocessing <span style=color:#f92672>import</span> sequence
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tqdm <span style=color:#f92672>import</span> tqdm
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用顯卡或cpu執行</span>
+</span></span><span style=display:flex><span>device <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>device(<span style=color:#e6db74>&#39;cuda&#39;</span> <span style=color:#66d9ef>if</span> torch<span style=color:#f92672>.</span>cuda<span style=color:#f92672>.</span>is_available() <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#39;cpu&#39;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;使用的設備: </span><span style=color:#e6db74>{</span>device<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集設定</span>
+</span></span><span style=display:flex><span>(X_train_np, y_train_np), (X_test_np, y_test_np) <span style=color:#f92672>=</span> imdb<span style=color:#f92672>.</span>load_data(num_words<span style=color:#f92672>=</span><span style=color:#ae81ff>10000</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 輸入序列長度 (500)</span>
+</span></span><span style=display:flex><span>X_train_padded_np <span style=color:#f92672>=</span> sequence<span style=color:#f92672>.</span>pad_sequences(X_train_np, maxlen<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>)
+</span></span><span style=display:flex><span>X_test_padded_np <span style=color:#f92672>=</span> sequence<span style=color:#f92672>.</span>pad_sequences(X_test_np, maxlen<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料轉型態，標籤必須為 torch.long 才能配合 nn.NLLLoss</span>
+</span></span><span style=display:flex><span>X_train_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(X_train_padded_np, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>long)
+</span></span><span style=display:flex><span>y_train_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(y_train_np, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>long)
+</span></span><span style=display:flex><span>X_test_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(X_test_padded_np, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>long)
+</span></span><span style=display:flex><span>y_test_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(y_test_np, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>long)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料合併</span>
+</span></span><span style=display:flex><span>full_train_dataset <span style=color:#f92672>=</span> TensorDataset(X_train_tensor, y_train_tensor)
+</span></span><span style=display:flex><span>test_dataset <span style=color:#f92672>=</span> TensorDataset(X_test_tensor, y_test_tensor)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 分割訓練集8:2分 (訓練集與驗證集)</span>
+</span></span><span style=display:flex><span>train_size <span style=color:#f92672>=</span> int((<span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.2</span>) <span style=color:#f92672>*</span> len(full_train_dataset))
+</span></span><span style=display:flex><span>val_size <span style=color:#f92672>=</span> len(full_train_dataset) <span style=color:#f92672>-</span> train_size
+</span></span><span style=display:flex><span>train_dataset, val_dataset <span style=color:#f92672>=</span> random_split(full_train_dataset, [train_size, val_size])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集分群批</span>
+</span></span><span style=display:flex><span>BATCH_SIZE <span style=color:#f92672>=</span> <span style=color:#ae81ff>64</span>
+</span></span><span style=display:flex><span>trainloader <span style=color:#f92672>=</span> DataLoader(train_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>valloader <span style=color:#f92672>=</span> DataLoader(val_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>testloader <span style=color:#f92672>=</span> DataLoader(test_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 模型定義</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RNN</span>(nn<span style=color:#f92672>.</span>Module):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> __init__(self):
+</span></span><span style=display:flex><span>        super()<span style=color:#f92672>.</span>__init__()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 詞嵌入層: 詞彙表大小 (10000)，詞向量維度 (32)</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>embedding <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Embedding(<span style=color:#ae81ff>10000</span>, <span style=color:#ae81ff>32</span>, padding_idx<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># SimpleRNN 層: 輸入 (32), 隱藏層大小 (32)</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>rnn <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>LSTM(
+</span></span><span style=display:flex><span>            input_size<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>,
+</span></span><span style=display:flex><span>            hidden_size<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>,
+</span></span><span style=display:flex><span>            num_layers<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>            batch_first<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 線性輸出層: 隱藏層大小 (32) 到 2 個類別 (正面/負面)</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>linear <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>32</span>, <span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將輸出轉換為 Log-機率，與 nn.NLLLoss 配合使用</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>logsoftmax <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>LogSoftmax(dim<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>forward</span>(self, x):
+</span></span><span style=display:flex><span>        embedded <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>embedding(x)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># rnn_outputs 包含所有時間步的輸出，_ 是最後的隱藏狀態</span>
+</span></span><span style=display:flex><span>        rnn_outputs, _ <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>rnn(embedded)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 僅取序列中最後一個時間步的輸出，代表整個評論的總結向量</span>
+</span></span><span style=display:flex><span>        last_output <span style=color:#f92672>=</span> rnn_outputs[:, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, :] 
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        logits <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>linear(last_output)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>logsoftmax(logits)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將模型轉移到指定設備</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> RNN()<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定損失: NLLLoss 配合 LogSoftmax</span>
+</span></span><span style=display:flex><span>criterion <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>NLLLoss()
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定優化: Adam</span>
+</span></span><span style=display:flex><span>optimizer <span style=color:#f92672>=</span> optim<span style=color:#f92672>.</span>Adam(model<span style=color:#f92672>.</span>parameters(), lr<span style=color:#f92672>=</span><span style=color:#ae81ff>0.001</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>NUM_EPOCHS <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定訓練次數</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> epoch <span style=color:#f92672>in</span> range(NUM_EPOCHS):
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 設定進度條，將訓練集載入</span>
+</span></span><span style=display:flex><span>    train_loop <span style=color:#f92672>=</span> tqdm(
+</span></span><span style=display:flex><span>        trainloader,
+</span></span><span style=display:flex><span>        desc<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Epoch </span><span style=color:#e6db74>{</span>epoch <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>NUM_EPOCHS<span style=color:#e6db74>}</span><span style=color:#e6db74> (訓練)&#34;</span>,
+</span></span><span style=display:flex><span>        unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>,
+</span></span><span style=display:flex><span>        leave<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 使用進度調</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> train_loop:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 訓練集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 梯度歸零，清除前一次批次的累積梯度</span>
+</span></span><span style=display:flex><span>        optimizer<span style=color:#f92672>.</span>zero_grad()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 反向傳播</span>
+</span></span><span style=display:flex><span>        loss<span style=color:#f92672>.</span>backward()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 更新權重</span>
+</span></span><span style=display:flex><span>        optimizer<span style=color:#f92672>.</span>step()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 顯示損失</span>
+</span></span><span style=display:flex><span>        train_loop<span style=color:#f92672>.</span>set_postfix(loss<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;</span><span style=color:#e6db74>{</span>loss<span style=color:#f92672>.</span>item()<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值 (argmax 獲取最高 Log-機率的索引)</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>argmax(outputs, dim<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>) 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 訓練結果輸出</span>
+</span></span><span style=display:flex><span>    train_loss_avg <span style=color:#f92672>=</span> total_loss <span style=color:#f92672>/</span> total_count
+</span></span><span style=display:flex><span>    train_acc_avg <span style=color:#f92672>=</span> total_correct <span style=color:#f92672>/</span> total_count
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;Epoch </span><span style=color:#e6db74>{</span>epoch<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>NUM_EPOCHS<span style=color:#e6db74>}</span><span style=color:#e6db74> - loss: </span><span style=color:#e6db74>{</span>train_loss_avg<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>train_acc_avg<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 切換到評估模式</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>eval()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>correct <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>total <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 不計算梯度</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>with</span> torch<span style=color:#f92672>.</span>no_grad():
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> tqdm(valloader, desc<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;驗證 (Validation)&#34;</span>, unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>): 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 驗證集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device) 
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>argmax(outputs, dim<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>) 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;驗證結果 - loss: </span><span style=color:#e6db74>{</span>total_loss <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>total_correct <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> tqdm(testloader, desc<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;最終測試 (Testing)&#34;</span>, unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>): 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 測試集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device) 
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>argmax(outputs, dim<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>) 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;測試集結果 - loss: </span><span style=color:#e6db74>{</span>total_loss <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>total_correct <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 切換到訓練模式</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>train()
+</span></span></code></pre></div><h2 id=非對稱式>非對稱式</h2><h2 id=llmbert>LLM(BERT)</h2><p>大型語言模型，主要是先將文字拆分，再將文字進行編號、填充、段落標記，之後設計模型進行訓練判斷(主要是用依照需求設計，不太會用現有模型)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f92672>import</span> torch
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> torch <span style=color:#f92672>import</span> nn, optim
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> torch.utils.data <span style=color:#f92672>import</span> TensorDataset, DataLoader
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> datasets <span style=color:#f92672>import</span> load_dataset
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> transformers <span style=color:#f92672>import</span> BertTokenizer, BertModel
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tqdm <span style=color:#f92672>import</span> tqdm
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用顯卡或cpu執行</span>
+</span></span><span style=display:flex><span>device <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>device(<span style=color:#e6db74>&#39;cuda&#39;</span> <span style=color:#66d9ef>if</span> torch<span style=color:#f92672>.</span>cuda<span style=color:#f92672>.</span>is_available() <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#39;cpu&#39;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;使用的設備: </span><span style=color:#e6db74>{</span>device<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 載入的 imdb </span>
+</span></span><span style=display:flex><span>raw_datasets <span style=color:#f92672>=</span> load_dataset(<span style=color:#e6db74>&#34;imdb&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料擷取200筆</span>
+</span></span><span style=display:flex><span>train_slice <span style=color:#f92672>=</span> raw_datasets[<span style=color:#e6db74>&#39;train&#39;</span>]<span style=color:#f92672>.</span>select(range(<span style=color:#ae81ff>200</span>))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定資料集和標籤</span>
+</span></span><span style=display:flex><span>texts <span style=color:#f92672>=</span> list(train_slice[<span style=color:#e6db74>&#39;text&#39;</span>])
+</span></span><span style=display:flex><span>labels <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array(train_slice[<span style=color:#e6db74>&#39;label&#39;</span>]) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 擷取器</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>bertinput</span>(texts):
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    model_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;bert-base-uncased&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 載入分詞器和 PyTorch BERT 模型</span>
+</span></span><span style=display:flex><span>    tokenizer <span style=color:#f92672>=</span> BertTokenizer<span style=color:#f92672>.</span>from_pretrained(model_name)
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 使用 BertModel (PyTorch 版本)</span>
+</span></span><span style=display:flex><span>    bert_model <span style=color:#f92672>=</span> BertModel<span style=color:#f92672>.</span>from_pretrained(model_name)<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    bert_model<span style=color:#f92672>.</span>eval()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>with</span> torch<span style=color:#f92672>.</span>no_grad():
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 對所有資料進行分詞</span>
+</span></span><span style=display:flex><span>        encoded_input <span style=color:#f92672>=</span> tokenizer(
+</span></span><span style=display:flex><span>            texts,
+</span></span><span style=display:flex><span>            return_tensors<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;pt&#39;</span>,
+</span></span><span style=display:flex><span>            padding<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;max_length&#39;</span>,
+</span></span><span style=display:flex><span>            truncation<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
+</span></span><span style=display:flex><span>            max_length<span style=color:#f92672>=</span><span style=color:#ae81ff>128</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將輸入資料移動到設備</span>
+</span></span><span style=display:flex><span>        input_ids <span style=color:#f92672>=</span> encoded_input[<span style=color:#e6db74>&#39;input_ids&#39;</span>]<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>        attention_mask <span style=color:#f92672>=</span> encoded_input[<span style=color:#e6db74>&#39;attention_mask&#39;</span>]<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> bert_model(input_ids<span style=color:#f92672>=</span>input_ids, attention_mask<span style=color:#f92672>=</span>attention_mask)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 提取 [CLS] token (即每個序列的第一個 token)</span>
+</span></span><span style=display:flex><span>        X_bert <span style=color:#f92672>=</span> outputs[<span style=color:#ae81ff>0</span>][:, <span style=color:#ae81ff>0</span>, :]<span style=color:#f92672>.</span>cpu() <span style=color:#75715e># 移回 CPU 準備分割和訓練</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 將 PyTorch 張量轉換為 NumPy 陣列進行分割</span>
+</span></span><span style=display:flex><span>    X_embeddings <span style=color:#f92672>=</span> X_bert<span style=color:#f92672>.</span>numpy()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> X_embeddings
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將資料轉型態</span>
+</span></span><span style=display:flex><span>texts_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(bertinput(texts), dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>float)
+</span></span><span style=display:flex><span>labels_tensor <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>tensor(labels, dtype<span style=color:#f92672>=</span>torch<span style=color:#f92672>.</span>float)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料合併</span>
+</span></span><span style=display:flex><span>all_raw_datasets <span style=color:#f92672>=</span> TensorDataset(texts_tensor, labels_tensor)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 分割資量集8:2分 (訓練集與測試集)</span>
+</span></span><span style=display:flex><span>full_train_size <span style=color:#f92672>=</span> int((<span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.2</span>) <span style=color:#f92672>*</span> len(all_raw_datasets))
+</span></span><span style=display:flex><span>test_size <span style=color:#f92672>=</span> len(all_raw_datasets) <span style=color:#f92672>-</span> full_train_size
+</span></span><span style=display:flex><span>full_train_dataset, test_dataset <span style=color:#f92672>=</span> random_split(all_raw_datasets, [full_train_size, test_size])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 分割訓練集8:2分 (訓練集與測試集)</span>
+</span></span><span style=display:flex><span>train_size <span style=color:#f92672>=</span> int((<span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.2</span>) <span style=color:#f92672>*</span> len(full_train_dataset))
+</span></span><span style=display:flex><span>val_size <span style=color:#f92672>=</span> len(full_train_dataset) <span style=color:#f92672>-</span> train_size
+</span></span><span style=display:flex><span>train_dataset, val_dataset <span style=color:#f92672>=</span> random_split(full_train_dataset, [train_size, val_size])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 資料集分群批</span>
+</span></span><span style=display:flex><span>BATCH_SIZE <span style=color:#f92672>=</span> <span style=color:#ae81ff>64</span>
+</span></span><span style=display:flex><span>trainloader <span style=color:#f92672>=</span> DataLoader(train_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>valloader <span style=color:#f92672>=</span> DataLoader(val_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>testloader <span style=color:#f92672>=</span> DataLoader(test_dataset, batch_size<span style=color:#f92672>=</span>BATCH_SIZE, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Sequential(
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 全連接層 將攤平層整理出128的輸出，輸入為728</span>
+</span></span><span style=display:flex><span>    nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>768</span>, <span style=color:#ae81ff>128</span>), nn<span style=color:#f92672>.</span>ReLU(),
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 0.2的機率隨機關閉輸出</span>
+</span></span><span style=display:flex><span>    nn<span style=color:#f92672>.</span>Dropout(<span style=color:#ae81ff>0.2</span>),
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 全連接層 最後整理輸出訓練集所分類的10個，輸入為128</span>
+</span></span><span style=display:flex><span>    nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>128</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定損失</span>
+</span></span><span style=display:flex><span>criterion <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>BCEWithLogitsLoss()
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定優化</span>
+</span></span><span style=display:flex><span>optimizer <span style=color:#f92672>=</span> optim<span style=color:#f92672>.</span>Adam(model<span style=color:#f92672>.</span>parameters(), lr<span style=color:#f92672>=</span><span style=color:#ae81ff>0.001</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>NUM_EPOCHS <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定訓練次數</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> epoch <span style=color:#f92672>in</span> range(NUM_EPOCHS):
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 設定進度條，將訓練集載入</span>
+</span></span><span style=display:flex><span>    train_loop <span style=color:#f92672>=</span> tqdm(
+</span></span><span style=display:flex><span>        trainloader,
+</span></span><span style=display:flex><span>        desc<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Epoch </span><span style=color:#e6db74>{</span>epoch <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>NUM_EPOCHS<span style=color:#e6db74>}</span><span style=color:#e6db74> (訓練)&#34;</span>,
+</span></span><span style=display:flex><span>        unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>,
+</span></span><span style=display:flex><span>        leave<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 使用進度調</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> train_loop:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 訓練集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 梯度歸零，清除前一次批次的累積梯度</span>
+</span></span><span style=display:flex><span>        optimizer<span style=color:#f92672>.</span>zero_grad()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 增加一維度</span>
+</span></span><span style=display:flex><span>        labels <span style=color:#f92672>=</span> labels<span style=color:#f92672>.</span>unsqueeze(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 反向傳播</span>
+</span></span><span style=display:flex><span>        loss<span style=color:#f92672>.</span>backward()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 更新權重</span>
+</span></span><span style=display:flex><span>        optimizer<span style=color:#f92672>.</span>step()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 顯示損失</span>
+</span></span><span style=display:flex><span>        train_loop<span style=color:#f92672>.</span>set_postfix(loss<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;</span><span style=color:#e6db74>{</span>loss<span style=color:#f92672>.</span>item()<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值 (argmax 獲取最高 Log-機率的索引)</span>
+</span></span><span style=display:flex><span>        probabilities <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>sigmoid(outputs)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換成0或1</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> (probabilities <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0.5</span>)<span style=color:#f92672>.</span>float()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 訓練結果輸出</span>
+</span></span><span style=display:flex><span>    train_loss_avg <span style=color:#f92672>=</span> total_loss <span style=color:#f92672>/</span> total_count
+</span></span><span style=display:flex><span>    train_acc_avg <span style=color:#f92672>=</span> total_correct <span style=color:#f92672>/</span> total_count
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;Epoch </span><span style=color:#e6db74>{</span>epoch<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>NUM_EPOCHS<span style=color:#e6db74>}</span><span style=color:#e6db74> - loss: </span><span style=color:#e6db74>{</span>train_loss_avg<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>train_acc_avg<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 切換到評估模式</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>eval()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>correct <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>total <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 不計算梯度</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>with</span> torch<span style=color:#f92672>.</span>no_grad():
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> tqdm(valloader, desc<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;驗證 (Validation)&#34;</span>, unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>): 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 驗證集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device) 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 增加一維度</span>
+</span></span><span style=display:flex><span>        labels <span style=color:#f92672>=</span> labels<span style=color:#f92672>.</span>unsqueeze(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值</span>
+</span></span><span style=display:flex><span>        probabilities <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>sigmoid(outputs)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換成0或1</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> (probabilities <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0.5</span>)<span style=color:#f92672>.</span>float()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;驗證結果 - loss: </span><span style=color:#e6db74>{</span>total_loss <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>total_correct <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 初始化損失和準確和數量</span>
+</span></span><span style=display:flex><span>    total_loss, total_correct, total_count <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> inputs, labels <span style=color:#f92672>in</span> tqdm(testloader, desc<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;最終測試 (Testing)&#34;</span>, unit<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;batch&#34;</span>): 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 測試集設定設備</span>
+</span></span><span style=display:flex><span>        inputs, labels <span style=color:#f92672>=</span> inputs<span style=color:#f92672>.</span>to(device), labels<span style=color:#f92672>.</span>to(device) 
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 增加一維度</span>
+</span></span><span style=display:flex><span>        labels <span style=color:#f92672>=</span> labels<span style=color:#f92672>.</span>unsqueeze(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 執行模型</span>
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(inputs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 取得損失</span>
+</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換預測值</span>
+</span></span><span style=display:flex><span>        probabilities <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>sigmoid(outputs)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 轉換成0或1</span>
+</span></span><span style=display:flex><span>        predicted <span style=color:#f92672>=</span> (probabilities <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0.5</span>)<span style=color:#f92672>.</span>float()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 將預測直查詢相加次數</span>
+</span></span><span style=display:flex><span>        total_correct <span style=color:#f92672>+=</span> (predicted <span style=color:#f92672>==</span> labels)<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總損失</span>
+</span></span><span style=display:flex><span>        total_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item() <span style=color:#f92672>*</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 加總訓練資料數量</span>
+</span></span><span style=display:flex><span>        total_count <span style=color:#f92672>+=</span> inputs<span style=color:#f92672>.</span>size(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;=&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;測試集結果 - loss: </span><span style=color:#e6db74>{</span>total_loss <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> - acc: </span><span style=color:#e6db74>{</span>total_correct <span style=color:#f92672>/</span> total_count<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 切換到訓練模式</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>train()
+</span></span></code></pre></div></div><footer><div><ul class=main_page_terms_ul_class><li class=main_page_terms_li_class><div>標籤:</div></li><ul class=main_page_terms_ul_class2><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>Python語言</div><a class=main_page_terms_a_class href=/tomku/tags/python%E8%AA%9E%E8%A8%80/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>筆記</div><a class=main_page_terms_a_class href=/tomku/tags/%E7%AD%86%E8%A8%98/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>AI</div><a class=main_page_terms_a_class href=/tomku/tags/ai/></a></li><li class=main_page_terms_li_class2><div class=main_page_terms_div_class>Pytorch</div><a class=main_page_terms_a_class href=/tomku/tags/pytorch/></a></li></ul></ul></div><nav class=main_page_section_nav_class><a class=main_page_section_a_class href=/tomku/python/notes/18/><samp>上一頁</samp><br><samp>python語言的筆記-pytorch-圖像AI模型</samp><br><samp><time datetime=2025-09-30T17:24:43+08:00>2025-09-30</time></samp></a></nav></footer></article></section></div><aside class="main right_aside_class"><div class=right_div_class><details class=right_details_class open><summary class=right_details_class>目錄</summary><nav id=TableOfContents><ul><li><a href=#pytorch-文字ai模型>pytorch-文字AI模型</a><ul><li><a href=#對稱式>對稱式</a><ul><li><a href=#simplernn>SimpleRNN</a></li><li><a href=#lstm>LSTM</a></li></ul></li><li><a href=#非對稱式>非對稱式</a></li><li><a href=#llmbert>LLM(BERT)</a></li></ul></li></ul></nav></details></div><div class=right_div_class><details class=right_related_details_class open><summary class=right_related_details_class>相關文章</summary><nav class=right_related_page_nav_class><ol class=right_related_page_ol_class></ol><hr></nav></details></div></aside></main><footer class=baseof_footer_class><center><p>Copyright @2024-2025 tomku的網誌 Powered by <a href=https://gohugo.io/>Hugo</a></p><p xmlns:cc=http://creativecommons.org/ns# xmlns:dct=http://purl.org/dc/terms/>Except where otherwise noted, <span property="dct:title">tomku的網誌</span> by <span property="cc:attributionName">YU-LUN KU</span> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target=_blank rel="license noopener noreferrer" style=display:inline-block>Attribution-ShareAlike 4.0 International<img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom;display:inline-block src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p><p>若有需聯絡請寄信到tom8760925@gmail.com</p><p>若分享內容有侵害您的著作權，請來信告知，我將儘速移除相關內容</p></center></footer></body></html>
